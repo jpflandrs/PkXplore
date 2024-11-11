@@ -30,12 +30,11 @@ As this is a version including the rDNA database, the creation is easy
 -  place the BLAST and public in some distant place
 -  run to use the "bind" method in Docker
 
-  ``docker run  -it \
-  
--p 8000:8000  \
---mount type=bind,src=/pathto/BLAST,target=/BLAST \
---mount type=bind,source=/pathto/public,target=/public \
-pkxplore``
+  ``docker run  -it \``\n
+  ``-p 8000:8000  \``
+``--mount type=bind,src=/pathto/BLAST,target=/BLAST \``
+``--mount type=bind,source=/pathto/public,target=/public \``
+``pkxplore``
 ## Testing
 Here some sequences to test the website 
 You may find more on the NCBI site.
