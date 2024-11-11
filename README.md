@@ -6,7 +6,7 @@ The whole project will include 23S and 5S rDNA and some frequently nucleic seque
 
 A version devoted to protein will appear if I have some time left.
 
-Note that the program is still in developpment even of it is fully functionnal.
+Note that the program is still in developpment even if it is fully functionnal.
 
 ## Aim
 The website is oriented toward teaching/learning the basic use of phylogeny to decipher the relation between bacteria and archaea species.
