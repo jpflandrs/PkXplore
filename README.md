@@ -29,7 +29,9 @@ As this is a version including the rDNA database, the creation is easy
 ### Deploy with BLAST (the database) and public (the users results) outside Docker
 -  place the BLAST and public in some distant place
 -  run to use the "bind" method in Docker
-   ``docker run  -it \
+
+  ``docker run  -it \
+  
 -p 8000:8000  \
 --mount type=bind,src=/pathto/BLAST,target=/BLAST \
 --mount type=bind,source=/pathto/public,target=/public \
