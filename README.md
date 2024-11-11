@@ -6,9 +6,12 @@ Note that the program is still in construction and will be completed and cleaned
 
 ## Julia installation
 Clone the project and launch 
-julia --project
-using GenieFramework; Genie.loadapp(); up()
+``julia --project
+using GenieFramework; Genie.loadapp(); up()``
+
+
 The server will start at http://localhost:8000/reactive
+
 Of course 
 export GENIE_ENV=prod  may increase the reactivity but if some problems arise you lose the logs
 
