@@ -6,8 +6,10 @@ Note that the program is still in construction and will be completed and cleaned
 
 ## Julia installation
 Clone the project and launch 
-``julia --project
-using GenieFramework; Genie.loadapp(); up()``
+
+``julia --project``
+
+``using GenieFramework; Genie.loadapp(); up()``
 
 
 The server will start at http://localhost:8000/reactive
@@ -18,8 +20,12 @@ export GENIE_ENV=prod  may increase the reactivity but if some problems arise yo
 ## Docker version
 ### Easy deployment
 As this is a version including the rDNA database, the creation is easy
-docker build . -t pkxplore 
-docker run  -p 8000:8000 pkxplore
+
+``docker build . -t pkxplore ``
+
+``docker run  -p 8000:8000 pkxplore``
+
+
 ### Deploy with BLAST (the database) and public (the users results) outside Docker
 -  place the BLAST and public in some distant place
 -  run to use the "bind" method in Docker
