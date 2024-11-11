@@ -17,7 +17,6 @@ It is also a way to understand some aspect of the analysis of bacteria communiti
 - The exploratory process is done by using _one_sequence only
 - In this version the 23S database has not been given, there are no protein daabases (but the final version expected soon will contain them)
 - The information layer on taxonomy is missing and will be added later
-- 
 ## Julia installation
 Clone the project and launch 
 
