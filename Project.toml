@@ -1,0 +1,7 @@
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+GenieFramework = "a59fdf5c-6bf0-4f5d-949c-a137c9e2f353"
+Luxor = "ae8d54c2-7ccd-5906-9d76-62fc9837b5bc"
+SplitApplyCombine = "03a91e81-4c3e-53e1-a0a4-9c0c8f19dd66"
+Stipple = "4acbeb90-81a0-11ea-1966-bdaff8155998"
+StippleDownloads = "291a174b-6542-42e7-9996-fc00d7c03310"

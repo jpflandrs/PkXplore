@@ -1,0 +1,5 @@
+┌ Info: 2024-11-11 12:13:19 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-11 12:13:21 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
