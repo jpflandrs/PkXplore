@@ -1,9 +1,23 @@
 # PkXplore
+## In short
 This is a small explorer of the phylogeny of Bacteria and Archaea (aka Prokaryotes, Pk) based on the nucleic sequences of some rDNA genes (16S only in this demontration).
-The whole project will include 23S and 5S rDNA and some frequently nucleic sequences databases of proteins like DNA-directed RNA polymerase β (rpoB) and Elongation Factor Tu (tuf) or groEL chaperonins.
-A version devoted to protein will appear if I have some time left.
-Note that the program is still in construction and will be completed and cleaned soon.
 
+The whole project will include 23S and 5S rDNA and some frequently nucleic sequences databases of proteins like DNA-directed RNA polymerase β (rpoB) and Elongation Factor Tu (tuf) or groEL chaperonins.
+
+A version devoted to protein will appear if I have some time left.
+
+Note that the program is still in developpment even of it is fully functionnal.
+
+## Aim
+The website is oriented toward teaching/learning the basic use of phylogeny to decipher the relation between bacteria and archaea species.
+
+It is also a way to understand some aspect of the analysis of bacteria communities.
+
+## Limitations
+- The exploratory process is done by using _one_sequence only
+- In this version the 23S database has not been given, there are no protein daabases (but the final version expected soon will contain them)
+- The information layer on taxonomy is missing and will be added later
+- 
 ## Julia installation
 Clone the project and launch 
 
