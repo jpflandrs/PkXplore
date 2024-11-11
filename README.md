@@ -22,12 +22,14 @@ docker run  -p 8000:8000 pkxplore
 -  run to use the "bind" method in Docker
    ``docker run  -it \
 -p 8000:8000  \
---mount type=bind,src=/Users/jean-pierreflandrois/geniepourtests/BLAST,target=/BLAST \
---mount type=bind,source=/Users/jean-pierreflandrois/geniepourtests/public,target=/public \
+--mount type=bind,src=/pathto/BLAST,target=/BLAST \
+--mount type=bind,source=/pathto/public,target=/public \
 pkxplore``
 ## Testing
 Here some sequences to test the website 
 You may find more on the NCBI site.
+Note that the ">" must be 
+------
 Uncultured bacterium 16S ribosomal RNA gene, partial sequence.
 PopSet: 646115884
 PopSet GenBank
