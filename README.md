@@ -30,6 +30,15 @@ Clone the project and launch
 
 ``julia --project``
 
+The requested libraries are "DataFrames", "Luxor", "SplitApplyCombine", "GenieFramework", "StippleDownloads", "Stipple".
+
+First cd into the project directory then run:
+``julia --project -e using Pkg; Pkg.instantiate() ``
+
+``julia  --project``
+
+Finally run the website
+
 ``using GenieFramework; Genie.loadapp(); up()``
 
 
