@@ -13,7 +13,7 @@ Note that the program is still in developpment even if it is fully functionnal.
 	- to quickly and easily discover the various phases of a phylogenetic study
  	- and then, as all the produced data are downloadable the same process can be done again with other methods
   	- as an application, to discover the relations between Bacteria and Archaea species.
-- It is also a way to explain some aspect of the analysis of bacteria communities (metagenome analysis).
+	- It is also a way to explain some aspect of the analysis of bacteria communities (metagenome analysis).
   
 - In our team
 	- It is used to quickly select a putative taxonomy level when required in a given program (typically to document the PGAP yaml file). 
@@ -21,7 +21,7 @@ Note that the program is still in developpment even if it is fully functionnal.
 	- For us it is also a way to quickly know the density of the genomes in RefSeq around a given target.
   
 ## Limitations
-- The exploratory process is done by using _one_sequence only
+- The exploratory process is done by using _one_ sequence only
 - In this version the 23S database has not been given, and there are no protein databases (but the final version expected soon will contain them)
 - The information layer on taxonomy is missing and will be added later
   
