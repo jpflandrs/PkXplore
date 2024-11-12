@@ -15,9 +15,10 @@ Note that the program is still in developpment even if it is fully functionnal.
   	- as an application, to discover the relations between Bacteria and Archaea species.
 - It is also a way to explain some aspect of the analysis of bacteria communities (metagenome analysis).
   
-- In the lab it is used to quickly select a putative taxonomy level when required in a given program (typically to document the PGAP yaml file). 
-- We use it also to understand the taxonomy discrepencies between various methods before using more sophisticated but also more complex methods like MSA/Core genome phylogeny.
-- For us it is also a way to quickly know the density of the genomes in RefSeq around a given target.
+- In our team
+	- It is used to quickly select a putative taxonomy level when required in a given program (typically to document the PGAP yaml file). 
+	- We use it also to understand the taxonomy discrepencies between various methods before using more sophisticated but also more complex methods like MSA/Core genome phylogeny.
+	- For us it is also a way to quickly know the density of the genomes in RefSeq around a given target.
   
 ## Limitations
 - The exploratory process is done by using _one_sequence only
