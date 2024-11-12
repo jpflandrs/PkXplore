@@ -9,14 +9,21 @@ A version devoted to protein will appear if I have some time left.
 Note that the program is still in developpment even if it is fully functionnal.
 
 ## Aim
-- The website is oriented toward teaching/learning the basic use of phylogeny to discover the relations between Bacteria and Archaea species.
-- It is also a way to understand some aspect of the analysis of bacteria communities (metagenome analysis).
-- It will be helpful for quality-control.
+- The website is oriented toward teaching/learning the basic use of phylogeny
+	- to quickly and easily discover the various phases of a phylogenetic study
+ 	- and then, as all the produced data are downloadable the same process can be done again with other methods
+  	- as an application, to discover the relations between Bacteria and Archaea species.
+- It is also a way to explain some aspect of the analysis of bacteria communities (metagenome analysis).
+  
+- In the lab it is used to quickly select a putative taxonomy level when required in a given program (typically to document the PGAP yaml file). 
+- We use it also to understand the taxonomy discrepencies between various methods before using more sophisticated but also more complex methods like MSA/Core genome phylogeny.
+- For us it is also a way to quickly know the density of the genomes in RefSeq around a given target.
   
 ## Limitations
 - The exploratory process is done by using _one_sequence only
-- In this version the 23S database has not been given, there are no protein daabases (but the final version expected soon will contain them)
+- In this version the 23S database has not been given, and there are no protein databases (but the final version expected soon will contain them)
 - The information layer on taxonomy is missing and will be added later
+  
 ## Julia installation
 Clone the project and launch 
 
