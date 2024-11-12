@@ -64,11 +64,11 @@ As this is a version including the rDNA database, the creation is easy
   
   ``-p 8000:8000  \``
   
-``--mount type=bind,src=/pathto/BLAST,target=/BLAST \``
+``--mount type=bind,src=/pathto/BLAST,target=/home/genie/app/BLAST \``
 
-``--mount type=bind,source=/pathto/public,target=/public \``
+``--mount type=bind,source=/pathto/public,target=/home/genie/app/public \``
 
-``--mount type=bind,source=/pathto/log,target=/log \``
+``--mount type=bind,source=/pathto/log,target=/home/genie/app/log \``
 
 ``pkxplore``
 
