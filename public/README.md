@@ -1,0 +1,1 @@
+The directory "public" is mandatory in the case if reactive sites
