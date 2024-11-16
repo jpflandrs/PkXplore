@@ -1,92 +1,95 @@
 # PkXplore
+
 ## In short
+
 This is a small explorer of the phylogeny of Bacteria and Archaea (aka Prokaryotes, Pk) based on the nucleic sequences of some rDNA genes (16S only in this demontration).
-
 The whole project will include 23S and 5S rDNA and some frequently nucleic sequences databases of proteins like DNA-directed RNA polymerase β (rpoB) and Elongation Factor Tu (tuf) or groEL chaperonins.
-
 A version devoted to protein will appear if I have some time left.
-
 Note that the program is still in developpment even if it is fully functionnal.
 
 ## Aim
-- The website is oriented toward teaching/learning the basic use of phylogeny
-	- To quickly and easily discover the various phases of a phylogenetic study
- 	- Then the same process can be done again with other methods by using the downloaded data
-  	- To discover the relations between Bacteria and Archaea species.
-	- It is also a way to explain some aspect of the analysis of bacteria communities (metagenome analysis).
-  
+
+The website is oriented toward teaching/learning the basic use of phylogeny
+
+- To quickly and easily discover the various phases of a phylogenetic study
+ - T hen the same process can be done again with other methods by using the downloaded data
+ - To discover the relations between Bacteria and Archaea species.
+
+It is also a way to explain some aspect of the analysis of bacteria communities (metagenome analysis).
 - In our team, on the research side
-	- It is used to quickly select a putative taxonomy level when required in a given process (typically to document the PGAP yaml file). 
-	- We use it also to understand the taxonomy discrepencies between various methods before using more sophisticated but also more complex methods like MSA/Core genome phylogeny.
-	- For us it is also a way to quickly know the density of the genomes in RefSeq around a given target.
+ - It is used to quickly select a putative taxonomy level when required in a given process (typically to document the PGAP yaml file). 
+ - We use it also to understand the taxonomy discrepencies between various methods before using more sophisticated but also more complex methods like MSA/Core genome phylogeny.
+ - For us it is also a way to quickly know the density of the genomes in RefSeq around a given target.
   
 ## Limitations
 - The exploratory process is done by using _one_ sequence only
 - In this version the 23S database has not been given, and there are no protein databases (but the final version expected soon will contain them)
 - The information layer on taxonomy is missing and will be added later
   
-## Julia installation
-Clone the project and launch 
+## Running through Julia & GenieFramework
 
-``julia --project``
+- 1) Clone the project
 
 The requested libraries are "DataFrames", "Luxor", "SplitApplyCombine", "GenieFramework", "StippleDownloads", "Stipple".
 
-First cd into the project directory then run:
+- 2) First cd into the project directory and install the libraries by running:
+
 ``julia --project -e using Pkg; Pkg.instantiate() ``
+
+- 3) Launch the project
 
 ``julia  --project``
 
-Finally run the website
+- 4) Finally run the website
 
 ``using GenieFramework; Genie.loadapp(); up()``
-
 
 The server will start at http://localhost:8000/reactive
 
 Of course 
-export GENIE_ENV=prod  may increase the reactivity but if some problems arise you lose the logs
+``export GENIE_ENV=prod``  may increase the reactivity but if some problems arise you will lose the logs
 
 ## Docker version
+
 ### Easy deployment
-As this is a version including the rDNA database, the creation is easy
+
+As this is a version including all the directories that we need (log,public,BLAST), the creation is easy
 
 ``docker build . -t pkxplore ``
 
 ``docker run  -p 8000:8000 pkxplore``
 
+_Note that all the directories are within the container_, this is not very useful if you are expecting many users.
 
-### Deploy with BLAST (the database) and public (the users results) outside Docker
--  place the BLAST and public and log directories in some distant place
--  run and use the "bind" method in Docker
+### Deploy with the directories BLAST (the database), log and public (the users results) outside Docker
 
-  ``docker run  -it \``
-  
-  ``-p 8000:8000  \``
-  
+- 1) Place the BLAST and public and log directories in some distant place ``/pathto/``
+- 2) Run (we use the "bind" method in Docker)
+
+``docker run  -it \``
+``-p 8000:8000  \``
 ``--mount type=bind,src=/pathto/BLAST,target=/home/genie/app/BLAST \``
-
 ``--mount type=bind,source=/pathto/public,target=/home/genie/app/public \``
-
 ``--mount type=bind,source=/pathto/log,target=/home/genie/app/log \``
-
 ``pkxplore``
 
 ## Testing
-Here some sequences to test the website 
+
+**Here some sequences to test the website 
 You may find more on the NCBI site.
-Note that, if missing, the ">" must be added at the beginning
-------
+Note that, if missing, the ">" must be added at the beginning of the fasta sequence**
+
 Uncultured bacterium 16S ribosomal RNA gene, partial sequence.
 PopSet: 646115884
 PopSet GenBank
-	•	Sequences
+ • Sequences
 Study Details
 Community Analysis of Biomass-Degrading Microorganisms from Obsidian Pool, Yellowstone National Park
 Vishnivetskaya,T.A., Poder,M., Hamilton-Brehm,S.D., Mosher,J.J., Palumbo,A.V., Phelps,T.J., Keller,M. and Elkins,J.G.
 
 
-``>gi|646115884|gb|KJ479277.1| Uncultured bacterium clone A5521a05 16S ribosomal RNA gene, partial sequence
+```
+>gi|646115884|gb|KJ479277.1| Uncultured bacterium clone A5521a05 16S ribosomal RNA gene, partial sequence
 GGACGAACGCTGGCGGCGTGCCTAACACATGCAAGTCGAGCGGAGGGGATAGGAGCTTGCTTCTTGAACC
 TCAGCGGCGGACGGGTGAGTAACACGTGGGTAACCTGCCCTTGAGAGGGGGATAACAGGTCGAAAGGCCT
 GCTAATACCGCATAACGCTAAGAAGCTGCATGGCGTCTTAGCCAAAGGTTAATTCCGCTCAAGGATGGGC
@@ -107,7 +110,8 @@ GGTTAACCAGGAGGAAGGTGGGGATGACGTCAAATCATCATGCCCCTTGTGCTCTGGGCTACACACGTGC
 TACAATGGCCGGTACAATGAGTTGCAAACCCGCGAGGGGGAGCTAATCTCAAAAACCGGTCCCCAGTTCG
 GATTGTAGGCTGCAACTCGCCTACATGAAGCTGGAGTTGCTAGTAATCGCGGATCAGCATGCCGCGGTGA
 ATACGTTCCCGGGCCTTGTACACACCGCCCGTCACACCATGAGAGCCGGCAACCACCCGAAGCCGAGTGG
-GCTAACCCGCAAAGGGAGGCTAGCTGTCGAAGGTGGGGCTGGTGATTGGGGT``
+GCTAACCCGCAAAGGGAGGCTAGCTGTCGAAGGTGGGGCTGGTGATTGGGGT
+
 
 >gi|646115885|gb|KJ479278.1| Uncultured bacterium clone A5521a08 16S ribosomal RNA gene, partial sequence
 GGACGAACGCTGGCGGCGTGCCTAACACATGCAAGTCGAGCGATATGGAGGTTGGATGTTATAGGTTAGA
@@ -224,6 +228,5 @@ AGGTGGCGAGCGTTGTCCGGAATTATTGGGCGTAAAGGGTGCGTAGGCGGTTTTTTAAGTGGGATGTGAA
 ATCCATGGGCTTAACCCATGAATTGCATTCCAAACTGGAGAGCTAGAGTGCAGGAGAGGAAAGCGGAATT
 CCCAGTGTAGCGGTGAAATGCGTAGAGATTGGGAGGAACACCAGTGGCGAAGGCGGCTTTCTGGACTGTA
 ACTGACGCTGAGGCACGAAAGCGTGGGGAGCAAACAGGATTAGATACCCTGGTAGTCCACGCTGTAAACG
-ATGGGTACTAGGTGTAGG
-
+ATGGGTACTAGGTGTAGG````
 
