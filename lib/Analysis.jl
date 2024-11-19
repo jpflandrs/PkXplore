@@ -156,9 +156,10 @@ end
 
 
 
-function alignement(fastafile)
+function alignement(fastafile::String)
     return alignefasta(fastafile,"mafft",replace(fastafile,"collection" => "alignement"))
 end
+
 function alignefasta(fasta::String,aligneur::String,sorties::String)
     #println("IN   ",fasta," ",aligneur," ",sorties)
     if aligneur == "kalign"
@@ -247,6 +248,11 @@ function trim(a_trimer::String,limitefiltrage::Float64)
     #
 end
 
+"""
+    tranchedemsa(a_trimer::String,debut::Int64,fin::Int64,matricetransposée::Vector{Vector{Char}},listkopf::Vector{String})
+
+ An aera has been selected, we adjust the MSA to the cut-off 
+"""
 function tranchedemsa(a_trimer::String,debut::Int64,fin::Int64,matricetransposée::Vector{Vector{Char}},listkopf::Vector{String})
     chappe::Bool = true #le télégraphe Chappe :)
     #verifications basiques
