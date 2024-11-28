@@ -167,6 +167,8 @@ function faitblast(db_blast::String, S::String, dirutilisateur::String, nbsearch
     vecteurtetescoupees=map((s) ->split(s,'=')[1],blastread[!,2])
     lataxinomie::Vector{String}=[] #Vector{String} ["Methanohalophilus_halophilus Methanohalophilus Methanosarcinaceae Methanosarcinales Methanomicrobia Euryarchaeota Archaea", "Methanohalophilus_halophilus
     lataxinomie=map((s) ->join(reverse(split(split(s,'=')[2],'-')),' '),blastread[!,2])
+    laqualite::Vector{String}=[]
+    laqualite=map((s) ->split(s,'~')[2],blastread[!,2])
     lesespèces::Vector{SubString{String}}=[]#Vector{SubString{String}} SubString{String}["Methanohalophilus_halophilus", "Methanohalophilus_halophilus",...
     lesespèces=map((s) ->split(s,'~')[1],blastread[!,2])
     evalue::Vector{Float64}=[]#Vector{Float64} [0.0, 0.0, 0.0, 0.0, 0.0]
@@ -222,7 +224,7 @@ function faitblast(db_blast::String, S::String, dirutilisateur::String, nbsearch
     write(collection_avec_query,join(vecteurfasta,'\n'))
     #println(join(vecteurfasta,'\n'))
 
-    return vecteurtetescoupees,evalue,scores,collection_avec_query
+    return listedesaextraire,lataxinomie,laqualite,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
 
 end
 

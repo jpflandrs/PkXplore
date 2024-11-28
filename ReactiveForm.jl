@@ -74,21 +74,31 @@ using DataFrames
 
     @in posdsk::String ="waiting for the link"
     @in downloadinfo::String = "not Ready"
-    #@out nomscourts = []
-    @out nomscourts::Vector{String}=[]
+    #@out genomeid = []
+    @out genomeid::Vector{String}=[]
     @out vecteurtetes::Vector{String}=[]
-    @out scoredivers::Vector{Tuple{SubString{String}, SubString{String}}}=[] # nomscourts,vecteurtetes,scoredivers,fichierfasta
+    @out scoredivers::Vector{Tuple{SubString{String}, SubString{String}}}=[] # genomeid,vecteurtetes,scoredivers,fichierfasta
+    ##ajoutscar :  vecteurtetescoupees,lataxinomie,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
+    @out lataxinomie::Vector{String}=[]
+    @out qualité::Vector{String}=[]
+    @out ali_length::Vector{Int64}=[]
+    @out identitynumber::Vector{Int64}=[]
+    @out identitypc::Vector{Float64}=[]
+    @out gapsopen::Vector{Int64}=[]
+
     @out fichierfasta::String = ""
-    @out scores = []
-    @out evalues = []
-    @out fichierfasta = ""
+    @out sscores::Vector{Int64}=[]
+    @out evalue::Vector{Float64}=[]
+
+    #@out fichierfasta = ""
     @out estalign = ""
     @out fasta_trimé =""
     @out fintrim = ""
     @out chappe::Bool = false
     @out message = ""
     @out termine = "Ready for a new submission"
-    @out ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))# sseqid           stitle                             evalue   bitscore  length  nident  pident   gapopen
+    #listedesaextraire,lataxinomie,laqualite,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
+    @out ddff = DataTable(DataFrame(SpeciesGenome=String["no data101"],GenomeId=String["no data"],Quality=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]))# sseqid           stitle                             evalue   bitscore  length  nident  pident   gapopen
     @out matricetransposee::Vector{Vector{Char}} =[] #la matrice transposée initiale après trimming
     @out transposée_msa::Vector{Vector{Char}} =[]
     @out matricetranchetransposee::Vector{Vector{Char}} =[] #la matrice transposée en cas de selection d'une tranche dans le MSA
@@ -135,7 +145,7 @@ using DataFrames
         BL=([],[],[],"")
         posdsk ="waiting for the link"
         downloadinfo = "not Ready"
-        nomscourts = []
+        genomeid = []
         nomslongs = []
         scores = []
         evalues = []
@@ -144,7 +154,7 @@ using DataFrames
         estalign = ""
         fintrim = ""
         termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
-        ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+        ddff = DataTable(DataFrame(SpeciesGenome=String["no data157"],GenomeId=String["no data"],Quality=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]))
         baumist = ""
         seaview_a = ""
         seaview_b = ""
@@ -155,24 +165,14 @@ using DataFrames
         borne_longueur_sup = 3500
         pourgzip = ""
         matricetrimtransposée::Vector{Vector{Char}}=[]
-        # S = ""
-        # p = ""
-        # ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
-        # baumist = ""
-        # termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
-        # seaview_a = ""
-        # seaview_b = ""
-        # seaview_c = ""
-        # paramètres = false
-        # ddff_pagination = DataTablePagination(rows_per_page = 1)
         
     end
     @onbutton trigger begin
         #nettoyer avant en cas de non utilisation du bouton clear
-        ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+        ddff = DataTable(DataFrame(SpeciesGenome=String["no data172"],GenomeId=String["no data"],Quality=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]))
         posdsk ="waiting for the link"
         downloadinfo = "not Ready"
-        nomscourts = []
+        genomeid = []
         nomslongs = []
         scores = []
         evalues = []
@@ -262,20 +262,21 @@ using DataFrames
                 posdsk = uniqueutilisateur()
                 termine = "Blast running and collecting similar sequences"
                 #println(typeof(p),p," ** ** ", typeof(posdsk),posdsk)
-                nomscourts,evalues,scores,fichierfasta = faitblast(banqueblast,p,posdsk,limitedsearch) ##vecteurtetescoupees,evalue,scores,collection_avec_query
+                genomeid,lataxinomie,qualité,evalues,scores,ali_length,identitynumber,identitypc,gapsopen,fichierfasta = faitblast(banqueblast,p,posdsk,limitedsearch) ##listedesaextraire,lataxinomie,laqualite,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
                 # BL = faitblast(banqueblast,p,posdsk,limitedsearch)
                 # if BL[1] ≠ [] #No hits found
                 #     fichierfasta=BL[4]
-                #     nomscourts = BL[1]
+                #     genomeid = BL[1]
 
-                #     for u in 1:length(nomscourts)
+                #     for u in 1:length(genomeid)
                 #         push!(scores,BL[3][u][1])
                 #         push!(evalues,BL[3][u][2])
                 #     end
-                if nomscourts ≠ [] #No hits found
+                if genomeid ≠ [] #No hits found
                     # fichierfasta=collection_avec_query
-                    # nomscourts = vecteurtetescoupees
-                    ddff = DataTable(DataFrame(SpeciesGenome=nomscourts,Scores=scores,Evalue=evalues))
+                    # genomeid = vecteurtetescoupees
+                    #rappel SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],Ali_Length=String["NAN"],Nb_Identity=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]
+                    ddff = DataTable(DataFrame(SpeciesGenome=lataxinomie,GenomeId=genomeid,Quality=qualité,Scores=scores,Evalue=evalues,Ali_length=ali_length,Nb_Identity=identitynumber,Identity=identitypc,GapsOpen=gapsopen))# rempplir DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],ali_length=String["NAN"],identitynumber=String["NAN"],identitypc=String["NAN"],gapsopen=String["NAN"]))
                     blast_fait = true
                   
                     if fairearbre #on fait l'alignement et l'arbre initial avec le trimming 0.1 habituel
@@ -331,7 +332,7 @@ using DataFrames
                 # resu= ()
                 # BL=([],[],[],"")
                 # #posdsk =""
-                # nomscourts = []
+                # genomeid = []
                 # nomslongs = []
                 # scores = []
                 # evalues = []
@@ -400,7 +401,7 @@ using DataFrames
             BL=([],[],[],"")
             
             downloadinfo = "not Ready"
-            nomscourts = []
+            genomeid = []
             nomslongs = []
             scores = []
             evalues = []
@@ -409,7 +410,9 @@ using DataFrames
             estalign = ""
             fintrim = ""
             termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
-            ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+            ddff = DataTable(DataFrame(SpeciesGenome=lataxinomie,GenomeId=genomeid,Quality=qualité,Scores=scores,Evalue=evalues,Ali_Length=ali_length,Nb_identity=IdentityNumber,Identity=identitypc,GapsOpen=gapsopen))
+            #Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]
+             #genomeid,lataxinomie,qualité,evalues,scores,ali_length,identitynumber,identitypc,gapsopen,fichierfasta
             baumist = ""
             seaview_a = ""
             seaview_b = ""
