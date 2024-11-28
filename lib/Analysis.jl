@@ -40,21 +40,21 @@ end
 function compresser(classeur_utilisateur) #intermédiaire de zippp (oui 3 p) pour travailler dans le directory utilisateur 
     #pwd(),"public","utilisateurs","task_$(timestamp)_$(random_string)"
     
-    println("---")
-    println(classeur_utilisateur)#/Users/jean-pierreflandrois/Documents/PKDBGENIESTIPPLE/public/utilisateurs/task_20241013_220057_lfXiwPpZ/
+    #println("---")
+    #println(classeur_utilisateur)#/Users/jean-pierreflandrois/Documents/PKDBGENIESTIPPLE/public/utilisateurs/task_20241013_220057_lfXiwPpZ/
     originaldir=pwd()
-    println(originaldir)
+    #println(originaldir)
 
     cd(classeur_utilisateur)
 
     
-    println(pwd())
+    #println(pwd())
     utilisateur=splitdir(classeur_utilisateur)[2]*".tar.zip"
     latelier=replace(splitdir(classeur_utilisateur)[2],"task_" => "atelier_")
-    println(utilisateur, "  <- tar va faire <-  ",latelier)
+    #println(utilisateur, "  <- tar va faire <-  ",latelier)
     try 
         cmd=`tar -zcvf  $utilisateur $latelier`
-        println(cmd)
+        #println(cmd)
         run(pipeline(cmd,stdout=devnull,stderr=devnull))#,stdout="dev/null",stderr="dev/null"))
         
     catch
@@ -63,7 +63,7 @@ function compresser(classeur_utilisateur) #intermédiaire de zippp (oui 3 p) pou
     end
 
     cd(originaldir)
-    println("retour...",pwd())
+    #println("retour...",pwd())
     return utilisateur
 
 end

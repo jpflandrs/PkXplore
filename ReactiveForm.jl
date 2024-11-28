@@ -49,14 +49,14 @@ using DataFrames
     ############################
     @onchange banqueselectionnée begin
         banqueblast = banqueselectionnée
-        println(banqueselectionnée," help bnk",  banqueblast,"  ",requestedseq)
+        # bnk",  banqueblast,"  ",requestedseq)
         # println("RM :",requestedseq," ",typeof(requestedseq))
         #println("selection :",limitedsearch," ",typeof(limitedsearch))
         #paramètres = true
     end
     @onchange requestedseq begin
         limitedsearch = requestedseq
-        println(requestedseq," help seq",  banqueblast,"  ",limitedsearch)
+        #println(requestedseq," help seq",  banqueblast,"  ",limitedsearch)
         # println("RM :",requestedseq," ",typeof(requestedseq))
         #println("selection :",limitedsearch," ",typeof(limitedsearch))
         #paramètres = true
@@ -296,7 +296,7 @@ using DataFrames
 
                         matricetrimtransposée = copy(transposée_msa) #important pour éviter les modifications NB matrice après trimming seulement (on détruit la matrice initiale)
                         chappe, message, fintrim = retourafasta(1,fasta_trimé,listkopf,matricetrimtransposée) #ancienne fonction etait directe mais il nous faut la matrice transposée pour les tranches à venir
-                        println(chappe,"***",message)
+                        #println(chappe,"***",message)
                         trim_fait = true
                         trim_fait_persistant= true
                         seaview_c = panoramatographe_nuc(replace(fintrim,".sth" =>".fasta"),replace(fintrim,".sth" =>""),1)
@@ -352,15 +352,15 @@ using DataFrames
     end
     @event download_event begin
         downloadinfo = "running..." #/Users/jean-pierreflandrois/Documents/PKDBGENIESTIPPLE/public/utilisateurs/task_20241013_220057_lfXiwPpZ/atelier
-        println("downloda process")
-        println(posdsk)
+        #println("downloda process")
+        #println(posdsk)
         pourgzip=compresser(splitdir(posdsk)[1]) #compresser atelier sous le nom de l'utilisateur
-        println("=====")
-        println(pourgzip)
+        #println("=====")
+        #println(pourgzip)
         downloadinfo = pourgzip
         try
             solution = joinpath("public", "utilisateurs", splitdir(posdsk)[1],pourgzip)
-            println("downloading...",joinpath("public", "utilisateurs", splitdir(posdsk)[1],pourgzip))
+            #println("downloading...",joinpath("public", "utilisateurs", splitdir(posdsk)[1],pourgzip))
             io = IOBuffer()
             open(solution, "r") do file 
                 write(io, read(file))
@@ -428,13 +428,13 @@ using DataFrames
     end
 
     @event choixposttrim begin
-        println("dans la selection posttrim")
+        #println("dans la selection posttrim")
         #travail = true
         travail2 = true
         selectionmsainf::Int64 = selectionintervalle.range.start
         selectionmsasup::Int64 = selectionintervalle.range.stop
         drapeau_tranche = true
-        println("cool de ",selectionmsainf," a ",selectionmsasup,"  ",typeof(selectionmsainf))
+        #println("cool de ",selectionmsainf," a ",selectionmsasup,"  ",typeof(selectionmsainf))
         trim_fait = false
         trim_fait_persistant= true
         
