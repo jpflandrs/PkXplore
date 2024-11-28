@@ -5,6 +5,8 @@ using SplitApplyCombine
 using Luxor
 using Base.Iterators
 using Serialization
+using CSV
+using DataFrames
 
 export uniqueutilisateur,faitblast,alignement,trim,faitrapidnj,validate_fasta_nucleic,validate_fasta_proteic,panoramatographe_nuc,exemples,compresser,retourafasta,tranchedemsa
 
@@ -77,38 +79,112 @@ function faitblast(db_blast::String, S::String, dirutilisateur::String, nbsearch
     #db_blast="TRECS_16SrRNA"
     limitedsearch::String= string(nbsearch)
 
-    vecteurtetes::Vector{String}=[]
-    vecteurtetescoupees::Vector{String}=[]
-    scoredivers::Vector{Tuple{SubString{String}, SubString{String}}}=[]#::Tuple{SubString{String},SubString{String}}=[]
-    collection_avec_query::String = ""
+    # vecteurtetes::Vector{String}=[]
+    # vecteurtetescoupees::Vector{String}=[]
+    # # scoredivers::Vector{Tuple{SubString{String}, SubString{String}}}=[]#::Tuple{SubString{String},SubString{String}}=[]
+    # scoredivers::Vector{SubString{String}}=[]
+    # collection_avec_query::String = ""
 
-    outfile=seqfile*"-blast"*db_blast*"_out.html"
-    sorties=joinpath(dirutilisateur,"blast.out.html")
-    cmd=`blastn -query $seqfile -db $la_db -evalue 0.1 -dust no -subject_besthit -num_threads 8 -max_target_seqs $limitedsearch -outfmt 0 -html`
-    run(pipeline(cmd,stdout=sorties,stderr=devnull)) #stdout="dev/null",stderr="dev/null")
-    listedesaextraire=[]
     
-    fileis = open(sorties) do f
-        acontinuer=true
-        while  acontinuer
-            for l in eachline(f) #note : if startswith(l,'>') # un petitipetit peu plus long
-                if occursin("***** No hits found *****",l)
-                    acontinuer=false
-                    return vecteurtetescoupees,vecteurtetes,scoredivers,collection_avec_query
-                elseif occursin("<a href=#",l)
-                    push!(listedesaextraire,split(l,' ')[1])
-                    scorecrude=split(l,'>')  
-                    #GCF_000430995.1 Thermobrachium_celere~RTES~GCF_000430995.1=Bacter...  <a href=#GCF_000430995.1>1218</a>    0.0
-                    push!(scoredivers,(strip(split(scorecrude[2],'<')[1]) ,strip(scorecrude[3]) )) #tuple ("1218","0")
-                elseif occursin("<a name=",l)
-                    acontinuer=false
-                end
-            end
-        end
-    end
+    # sorties=joinpath(dirutilisateur,"blast.out.html")
+    # cmd=`blastn -query $seqfile -db $la_db -evalue 0.1 -dust no -subject_besthit -num_threads 8 -max_target_seqs $limitedsearch -outfmt "0" -html`
+    # run(pipeline(cmd,stdout=sorties,stderr=devnull)) #stdout="dev/null",stderr="dev/null")
+    
+    sorties=joinpath(dirutilisateur,"blast.out.stst")
+    cmd=`blastn -query $seqfile -db $la_db -evalue 0.1 -dust no -subject_besthit -num_threads 8 -max_target_seqs $limitedsearch -outfmt "10 sseqid  stitle evalue bitscore length nident pident gapopen qseq sseq " ` #delim=@
+    """
+    The supported format specifiers are:
+           qseqid means Query Seq-id
+              qgi means Query GI
+             qacc means Query accesion
+          qaccver means Query accesion.version
+             qlen means Query sequence length
+           sseqid means Subject Seq-id
+        sallseqid means All subject Seq-id(s), separated by a ';'
+              sgi means Subject GI
+           sallgi means All subject GIs
+             sacc means Subject accession
+          saccver means Subject accession.version
+          sallacc means All subject accessions
+             slen means Subject sequence length
+           qstart means Start of alignment in query
+             qend means End of alignment in query
+           sstart means Start of alignment in subject
+             send means End of alignment in subject
+             qseq means Aligned part of query sequence
+             sseq means Aligned part of subject sequence
+           evalue means Expect value
+         bitscore means Bit score
+            score means Raw score
+           length means Alignment length
+           pident means Percentage of identical matches
+           nident means Number of identical matches
+         mismatch means Number of mismatches
+         positive means Number of positive-scoring matches
+          gapopen means Number of gap openings
+             gaps means Total number of gaps
+             ppos means Percentage of positive-scoring matches
+           frames means Query and subject frames separated by a '/'
+           qframe means Query frame
+           sframe means Subject frame
+             btop means Blast traceback operations (BTOP)
+          staxids means Subject Taxonomy ID(s), separated by a ';'
+        sscinames means Subject Scientific Name(s), separated by a ';'
+        scomnames means Subject Common Name(s), separated by a ';'
+       sblastnames means Subject Blast Name(s), separated by a ';'
+                (in alphabetical order)
+       sskingdoms means Subject Super Kingdom(s), separated by a ';'
+                (in alphabetical order) 
+           stitle means Subject Title
+       salltitles means All Subject Title(s), separated by a '&lt;&gt;'
+          sstrand means Subject Strand
+            qcovs means Query Coverage Per Subject
+          qcovhsp means Query Coverage Per HSP
+    """
+    run(pipeline(cmd,stdout=sorties,stderr=devnull)) 
+
+    blastread=CSV.read(sorties,DataFrame; header=["sseqid","stitle","evalue","bitscore","length","nident", "pident","gapopen", "qseq", "sseq"])
+    ############
+    # CAS DE
+    #blastn -query public/utilisateurs/task_20241120_220159_DllnZymE/atelier_20241120_220159_DllnZymE/blastfasta.fasta -db BLAST/TRECS_16SrRNA.fst -evalue 0.1 -dust no -subject_besthit -num_threads 8 -max_target_seqs 5 -outfmt "10 sseqid  stitle evalue bitscore length nident pident gapopen qseq sseq" 
+    # 10 = Comma-separated values
+    # evalue means Expect value
+    # bitscore means Bit score
+    # score means Raw score
+    # length means Alignment length
+    # pident means Percentage of identical matches
+    # nident means Number of identical matches
+    # gapopen means Number of gap openings
+    # qseq means Aligned part of query sequence
+    # sseq means Aligned part of subject sequence
+    #GCF_900106905.1,Methanohalophilus_halophilus~TEU~GCF_900106905.1=Archaea-Euryarchaeota-Methanomicrobia-Methanosarcinales-Methanosarcinaceae-Methanohalophilus-Methanohalophilus_halophilus,0.0,2061,1116,1116,100.000,0,nAAAGGAATTGACGGGG...,...GAAGCAACGCGAAGAACCTT
+    ############
+    collection_avec_query::String = ""
+    #seqfile::String=joinpath(dirutilisateur,"blastfasta.fasta")
+    listedesaextraire::Vector{String15}=[]#Vector{String15} String15["GCF_900106905.1", "GCF_001889405.1", "GCF_003722055.1", "GCF_002761295.1", "GCF_003722115.1"]
+    listedesaextraire=blastread[!,1]
+    vecteurtetescoupees::Vector{SubString{String}}=[]#Vector{SubString{String}} SubString{String}["Methanohalophilus_halophilus~TEU~GCF_900106905.1", "Methanohalophilus_halophilus~RTEC~GCF_001889405.1",...
+    vecteurtetescoupees=map((s) ->split(s,'=')[1],blastread[!,2])
+    lataxinomie::Vector{String}=[] #Vector{String} ["Methanohalophilus_halophilus Methanohalophilus Methanosarcinaceae Methanosarcinales Methanomicrobia Euryarchaeota Archaea", "Methanohalophilus_halophilus
+    lataxinomie=map((s) ->join(reverse(split(split(s,'=')[2],'-')),' '),blastread[!,2])
+    lesespèces::Vector{SubString{String}}=[]#Vector{SubString{String}} SubString{String}["Methanohalophilus_halophilus", "Methanohalophilus_halophilus",...
+    lesespèces=map((s) ->split(s,'~')[1],blastread[!,2])
+    evalue::Vector{Float64}=[]#Vector{Float64} [0.0, 0.0, 0.0, 0.0, 0.0]
+    evalue=blastread[!,3]
+    scores::Vector{Int64}=[]#Vector{Int64} [2061, 2061, 2061, 2056, 2056]
+    scores=blastread[!,4]
+    ali_length::Vector{Int64}=[]#Vector{Int64} [1116, 1116, 1116, 1116, 1116]
+    ali_length=blastread[!,5]
+    identitynumber::Vector{Int64}=[] #number of identical matches Vector{Int64} [1116, 1116, 1116, 1115, 1115]
+    identitynumber=blastread[!,6]
+    identitypc::Vector{Float64}=[] #Percentage of identical matches Vector{Float64} [100.0, 100.0, 100.0, 99.91, 99.91]
+    identitypc=blastread[!,7]
+    gapsopen::Vector{Int64}=[]#Vector{Int64} [0, 0, 0, 0, 0]
+    gapsopen=blastread[!,8]
+    #qseq
+    #sseq
     ciblestxt::String=joinpath(dirutilisateur,"blast.list.txt")
     write(ciblestxt,join(listedesaextraire,"\n"))
-
     f = open(seqfile, "r")
     fastainit::String= read(f, String)       
     close(f)
@@ -127,8 +203,8 @@ function faitblast(db_blast::String, S::String, dirutilisateur::String, nbsearch
                 if startswith(l,'>')
                     #println(l)
                     if ! isempty(localfasta)
-                            push!(vecteurtetes,localtete)
-                            push!(vecteurtetescoupees,split(strip(localtete,'>'),'=')[1])
+                            # push!(vecteurtetes,localtete)
+                            # push!(vecteurtetescoupees,split(strip(localtete,'>'),'=')[1])
                             fantome=join(localfasta,"")
                             #println(localtete,"  ",split(strip(localtete,'>'),'=')[1])
                             push!(vecteurfasta,localtete*'\n'*fantome)
@@ -142,14 +218,11 @@ function faitblast(db_blast::String, S::String, dirutilisateur::String, nbsearch
             end
         end
     end
-
-
-    #println(vecteurtetes)
     collection_avec_query=joinpath(dirutilisateur,"collection_finale.fasta")
     write(collection_avec_query,join(vecteurfasta,'\n'))
     #println(join(vecteurfasta,'\n'))
 
-    return vecteurtetescoupees,vecteurtetes,scoredivers,collection_avec_query
+    return vecteurtetescoupees,evalue,scores,collection_avec_query
 
 end
 
@@ -248,11 +321,9 @@ function trim(a_trimer::String,limitefiltrage::Float64)
     #
 end
 
-"""
-    tranchedemsa(a_trimer::String,debut::Int64,fin::Int64,matricetransposée::Vector{Vector{Char}},listkopf::Vector{String})
 
- An aera has been selected, we adjust the MSA to the cut-off 
-"""
+#An aera has been selected, we adjust the MSA to the cut-off -> 
+
 function tranchedemsa(a_trimer::String,debut::Int64,fin::Int64,matricetransposée::Vector{Vector{Char}},listkopf::Vector{String})
     chappe::Bool = true #le télégraphe Chappe :)
     #verifications basiques
@@ -382,15 +453,19 @@ function lis_moi_fasta(entree::String)
     end
     return vecteurdessequences
 end
-function panoramatographe_nuc(entree::String,sortie::String,cotécarré::Int) #png ici
+
+function panoramatographe_nuc(entree::String,sortie::String,cotécarré::Int) #png ici la fonction à partir d'un fichier
     A::Vector{String}=lis_moi_fasta(entree)
     if occursin("collection_finale.fasta",entree) #ajout des "-" par rapport à la sequence la plus longue
         lmax=sort(map(x -> length(x),A),rev=true)[1]
         A=map(x-> x*"-"^(lmax-length(x)),A)
     end
+    return panoramatographenuc_tric(A,sortie,cotécarré)
+end
+function panoramatographenuc_tric(A::Vector{String},sortie::String,cotécarré::Int) #là on peut envoyer une matrice fasta donc on peut traiter les blasts de sortie
     # a partir de A on fabrique une liste de colorisation et une liste de nom de bases
     B::Vector{Vector{SubString{String}}}= [split(i,"") for i in A] 
-    colorisé::Vector{Vector{String}}=map((j) -> [replace(i,"A" => "red", "T" => "blue","C" => "green","G" => "yellow","N" => "grey","-" => "black") for i in j],B)
+    colorisé::Vector{Vector{String}}=map((j) -> [replace(i,"A" => "red", "T" => "blue","C" => "green","G" => "yellow","N" => "grey","-" => "black","R"  => "grey","Y"  => "grey","K"  => "grey","M"  => "grey","S"  => "grey","W"  => "grey","B"  => "grey","D"  => "grey","H"  => "grey","V"  => "grey") for i in j],B) #RYKMSWBDHV
     couleursvector::Vector{String}= [(colorisé...)...] #la liste de 1 ... n
     bases::Vector{Char}=[(A...)...] # les noms des bases de 1 ... n
     type::String = "png"

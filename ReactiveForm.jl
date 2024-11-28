@@ -24,7 +24,7 @@ using DataFrames
     @in termine = "Blast running"
     @in banqueselectionnée = "TRECS_16SrRNA.fst"
     # @out listofbanques = ""
-    @in listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst"]
+    @in listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
     #@in choixbanque = false
     @in requestedseq = 50
     @in limitedsearch = 50
@@ -88,7 +88,7 @@ using DataFrames
     @out chappe::Bool = false
     @out message = ""
     @out termine = "Ready for a new submission"
-    @out ddff = DataTable(DataFrame(Species=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+    @out ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))# sseqid           stitle                             evalue   bitscore  length  nident  pident   gapopen
     @out matricetransposee::Vector{Vector{Char}} =[] #la matrice transposée initiale après trimming
     @out transposée_msa::Vector{Vector{Char}} =[]
     @out matricetranchetransposee::Vector{Vector{Char}} =[] #la matrice transposée en cas de selection d'une tranche dans le MSA
@@ -144,7 +144,7 @@ using DataFrames
         estalign = ""
         fintrim = ""
         termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
-        ddff = DataTable(DataFrame(Species=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+        ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
         baumist = ""
         seaview_a = ""
         seaview_b = ""
@@ -157,7 +157,7 @@ using DataFrames
         matricetrimtransposée::Vector{Vector{Char}}=[]
         # S = ""
         # p = ""
-        # ddff = DataTable(DataFrame(Species=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+        # ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
         # baumist = ""
         # termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
         # seaview_a = ""
@@ -169,7 +169,7 @@ using DataFrames
     end
     @onbutton trigger begin
         #nettoyer avant en cas de non utilisation du bouton clear
-        ddff = DataTable(DataFrame(Species=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+        ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
         posdsk ="waiting for the link"
         downloadinfo = "not Ready"
         nomscourts = []
@@ -262,7 +262,7 @@ using DataFrames
                 posdsk = uniqueutilisateur()
                 termine = "Blast running and collecting similar sequences"
                 #println(typeof(p),p," ** ** ", typeof(posdsk),posdsk)
-                nomscourts,vecteurtetes,scoredivers,fichierfasta = faitblast(banqueblast,p,posdsk,limitedsearch)
+                nomscourts,evalues,scores,fichierfasta = faitblast(banqueblast,p,posdsk,limitedsearch) ##vecteurtetescoupees,evalue,scores,collection_avec_query
                 # BL = faitblast(banqueblast,p,posdsk,limitedsearch)
                 # if BL[1] ≠ [] #No hits found
                 #     fichierfasta=BL[4]
@@ -275,36 +275,9 @@ using DataFrames
                 if nomscourts ≠ [] #No hits found
                     # fichierfasta=collection_avec_query
                     # nomscourts = vecteurtetescoupees
-
-                    for u in 1:length(nomscourts)
-                        push!(scores,scoredivers[u][1])
-                        push!(evalues,scoredivers[u][2])
-                    end
-                    ddff = DataTable(DataFrame(Species=nomscourts,Scores=scores,Evalue=evalues))
+                    ddff = DataTable(DataFrame(SpeciesGenome=nomscourts,Scores=scores,Evalue=evalues))
                     blast_fait = true
-                    # SpeciesNames="Species"
-                    # ScoreBits="Scores(bits)"
-                    # Evalue="E_value"
-                    #println(resu)
-                    # df = DataFrame(SpeciesNames=String[],ScoreBits=Int[], Evalue=Float64[])
-                    # for u in 1:length(nomscourts)
-                    #     push!(df,(nomscourts[u],scores[u][1],scores[u][2]))
-                    # end
-                    # #println(df)
-                    # # @app begin
-                    # textfield([DataTable(df)])
-                    # end
-                        #         [
-                        #     range(1:1:30, :Range_Markers_r, markers = true, label = true),
-                        #     range(1:1:30, :Range_Markers_r, var"marker-labels" = true, color = "orange"),
-                        #     range(
-                        #         0:5:30,
-                        #         :Range_Markers_r,
-                        #         markers = true,
-                        #         var":marker-labels" = "Range_Markers_labels",
-                        #         color = "secondary",
-                        #     ),
-                        # ]
+                  
                     if fairearbre #on fait l'alignement et l'arbre initial avec le trimming 0.1 habituel
                         seaview_a = panoramatographe_nuc(fichierfasta,replace(fichierfasta,".fasta" =>""),1)#(entree::String,sortie::String,cotécarré::Int)
                         seaview_a = split(seaview_a,"public/")[2]
@@ -342,7 +315,7 @@ using DataFrames
                         termine = "THE LENGTH OF THE QUERY IS UNADEQUATE FOR PHYLOGENY: BLAST ONLY. For help: enter  ?length in the fasta form"
                     end
                 else
-                    termine = "BLAST RESULT IS EMPTY ***** No hits found ***** "
+                    termine = "***** No hits found ***** Did you choose the right bank ?"
 
                 end
                 #reininitialisation
@@ -367,7 +340,7 @@ using DataFrames
                 # fintrim = ""
                 # #seaview = ""
                 # limitedsearch= 50
-                #ddff = DataTable(DataFrame(Species=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+                #ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
                 #baumist = ""
                 #println("*************")
                 #uploader(label="Upload Image", autoupload=true, multiple=true, method="POST", url="/upload", field__name="img")
@@ -436,7 +409,7 @@ using DataFrames
             estalign = ""
             fintrim = ""
             termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
-            ddff = DataTable(DataFrame(Species=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
+            ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
             baumist = ""
             seaview_a = ""
             seaview_b = ""
@@ -455,6 +428,7 @@ using DataFrames
     end
 
     @event choixposttrim begin
+        println("dans la selection posttrim")
         #travail = true
         travail2 = true
         selectionmsainf::Int64 = selectionintervalle.range.start

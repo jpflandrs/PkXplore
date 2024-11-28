@@ -1,0 +1,13 @@
+┌ Info: 2024-11-28 16:26:54 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplorev2"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 16:26:55 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplorev2"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 16:26:55 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 16:26:55 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 16:26:57 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 16:26:58 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
