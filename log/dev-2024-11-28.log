@@ -164,3 +164,210 @@
 └ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
 ┌ Info: 2024-11-28 19:34:48 Listening on: 127.0.0.1:8000, thread id: 1
 └ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Info: 2024-11-28 20:18:59 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:18:59 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:21:07 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:21:07 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:21:23 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:21:23 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:21:37 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:21:37 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:21:58 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:21:58 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:23:42 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:23:42 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:24:34 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:24:34 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:25:26 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:25:26 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:25:40 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:25:40 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:25:48 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:25:48 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:27:35 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:27:35 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:28:05 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:28:05 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:32:44 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:32:44 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:40:35 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:40:35 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:45:33 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:45:33 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:46:16 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 20:46:19 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:46:20 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 20:46:21 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Info: 2024-11-28 20:47:01 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:47:36 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 20:47:37 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 20:47:38 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:47:38 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 20:47:39 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 20:47:40 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Info: 2024-11-28 21:22:25 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:22:25 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:23:33 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 21:23:34 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 21:23:35 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:23:35 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:23:37 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 21:23:37 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Info: 2024-11-28 21:48:23 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:48:23 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:51:11 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:51:11 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:52:06 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:52:06 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:55:36 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:55:36 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:59:38 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 21:59:38 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:02:31 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:02:31 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:03:02 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:03:06 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:03:08 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 22:03:09 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Info: 2024-11-28 22:05:01 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:05:36 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:05:37 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:05:38 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:05:38 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:05:39 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 22:05:40 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Info: 2024-11-28 22:12:01 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:12:01 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:12:35 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:12:36 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:12:37 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:12:37 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:12:38 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 22:12:39 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Warning: 2024-11-28 22:13:33 DimensionMismatch("column :SpeciesGenome has length 30 and column :Evalue has length 0")
+└ @ Stipple /Users/jean-pierreflandrois/.julia/packages/Stipple/k6QKE/src/Stipple.jl:994
+┌ Info: 2024-11-28 22:20:49 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:20:50 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:20:51 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:20:51 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:20:53 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 22:20:53 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Info: 2024-11-28 22:24:01 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:24:02 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:24:03 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:24:03 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:24:05 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 22:24:05 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
+┌ Info: 2024-11-28 22:26:42 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:26:43 Watching ["/Users/jean-pierreflandrois/Documents/GitHub/PkXplore"]
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:19
+┌ Info: 2024-11-28 22:26:44 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:26:44 Autoreloading
+└ @ GenieAutoReload /Users/jean-pierreflandrois/.julia/packages/GenieAutoReload/zeTlF/src/GenieAutoReload.jl:22
+┌ Info: 2024-11-28 22:26:46 
+│ Web Server starting at http://127.0.0.1:8000 
+└ @ Genie.Server /Users/jean-pierreflandrois/.julia/packages/Genie/BEk6Z/src/Server.jl:182
+┌ Info: 2024-11-28 22:26:46 Listening on: 127.0.0.1:8000, thread id: 1
+└ @ HTTP.Servers /Users/jean-pierreflandrois/.julia/packages/HTTP/y3eEt/src/Servers.jl:382
