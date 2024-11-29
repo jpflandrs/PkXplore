@@ -158,6 +158,8 @@ function faitblast(db_blast::String, S::String, dirutilisateur::String, nbsearch
     # qseq means Aligned part of query sequence
     # sseq means Aligned part of subject sequence
     #GCF_900106905.1,Methanohalophilus_halophilus~TEU~GCF_900106905.1=Archaea-Euryarchaeota-Methanomicrobia-Methanosarcinales-Methanosarcinaceae-Methanohalophilus-Methanohalophilus_halophilus,0.0,2061,1116,1116,100.000,0,nAAAGGAATTGACGGGG...,...GAAGCAACGCGAAGAACCTT
+    #GCF_003977595.1,Lysinibacillus_antri~RTEU~GCF_003977595.1=Bacteria-Bacillota-Bacilli-Bacillales-Bacillaceae-Lysinibacillus-Lysinibacillus_antri,0.0,1170,1010,887,87.822,15,
+    #GCF_003977595.1,Lysinibacillus_antri~RTEU~GCF_003977595.1=Bacteria-Bacillota-Bacilli-Bacillales-Bacillaceae-Lysinibacillus-Lysinibacillus_antri,3.73e-13,76.8,75,64,85.333,1,
     ############
     collection_avec_query::String = ""
     #seqfile::String=joinpath(dirutilisateur,"blastfasta.fasta")
@@ -173,7 +175,7 @@ function faitblast(db_blast::String, S::String, dirutilisateur::String, nbsearch
     lesespèces=map((s) ->split(s,'~')[1],blastread[!,2])
     evalue::Vector{Float64}=[]#Vector{Float64} [0.0, 0.0, 0.0, 0.0, 0.0]
     evalue=blastread[!,3]
-    scores::Vector{Int64}=[]#Vector{Int64} [2061, 2061, 2061, 2056, 2056]
+    scores::Vector{Float64}=[]#Vector{Int64} [2061, 2061, 2061, 2056, 2056]
     scores=blastread[!,4]
     ali_length::Vector{Int64}=[]#Vector{Int64} [1116, 1116, 1116, 1116, 1116]
     ali_length=blastread[!,5]
