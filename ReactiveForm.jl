@@ -25,7 +25,8 @@ using DataFrames
     @in banqueselectionnée = "TRECS_16SrRNA.fst"
     # @out listofbanques = ""
     @in listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
-    #@in choixbanque = false
+    @in borne_longueur_inf=800
+    @in borne_longueur_sup=2000
     @in requestedseq = 50
     @in limitedsearch = 50
     @in selectionintervalle = RangeData(0:100)
@@ -49,10 +50,19 @@ using DataFrames
     ############################
     @onchange banqueselectionnée begin
         banqueblast = banqueselectionnée
-        # bnk",  banqueblast,"  ",requestedseq)
-        # println("RM :",requestedseq," ",typeof(requestedseq))
-        #println("selection :",limitedsearch," ",typeof(limitedsearch))
-        #paramètres = true
+        if banqueblast == "TRECS_16SrRNA.fst"
+            borne_longueur_inf=800
+            borne_longueur_sup=2200
+        elseif banqueblast == "TRECS_23SrRNA.fst"
+            borne_longueur_inf=1400
+            borne_longueur_sup=4500
+        elseif banqueblast == "TRECS_5SrRNA.fst"
+            borne_longueur_inf=75
+            borne_longueur_sup=200
+        end
+        
+        println("selection :",borne_longueur_inf," ",borne_longueur_sup)
+        
     end
     @onchange requestedseq begin
         limitedsearch = requestedseq
@@ -109,9 +119,10 @@ using DataFrames
     @out seaview_b = ""
     @out seaview_c = ""
     @out seaview_sel = ""
-    @out borne_longueur_inf = 400 #dépend de la banque ici 16S
+    @out borne_longueur_inf = 600 #dépend de la banque ici 16S
     @out borne_longueur_sup = 2500
     @out pourgzip = ""
+    
     @onbutton clearit begin
         trigger = false
         iclearit = false
@@ -125,15 +136,6 @@ using DataFrames
         arbre_fait= false
         figure_arbre_fait= false
         selectionfaite =false
-        
-            #banqueblast = ""
-             #banqueselectionnée="TRECS_16SrRNA.fst"
-                # @out listofbanques = ""
-            #listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst"]
-            #choixbanque = false
-            #requestedseq = 50
-            #limitedsearch = 50
-            #paramètres = false
         travail = false
         travail2 = false
         ddff_pagination = DataTablePagination(rows_per_page = 1)
@@ -161,8 +163,8 @@ using DataFrames
         seaview_c = ""
         seaview_sel = ""
         baumist_sel = ""
-        borne_longueur_inf = 600
-        borne_longueur_sup = 3500
+        # borne_longueur_inf = 600
+        # borne_longueur_sup = 3500
         pourgzip = ""
         matricetrimtransposée::Vector{Vector{Char}}=[]
         
@@ -207,7 +209,7 @@ using DataFrames
             S = "MISSING FASTA ! "
         elseif occursin("?length",S)
             termine = "See help in the fasta box"
-            S = "A decent phylogenetic reconstruction needs suffisant phylogenetic signal\n and a balanced phylogenetic signal with that of the sequences in the database\n "
+            S = "A decent phylogenetic reconstruction needs suffisant phylogenetic signal\n and a balanced phylogenetic signal with that of the sequences in the database\n With $banqueblast min=$borne_longueur_inf, max=$borne_longueur_sup bp"
 
         elseif occursin("?demo:",S)
             termine = "Selection of a demonstrative sequence"
@@ -236,13 +238,13 @@ using DataFrames
             decisonlongueur_l= longueurdefasta < borne_longueur_inf ? false : true 
             decisonlongueur_L= longueurdefasta > borne_longueur_sup ? false : true 
             if ! decisonlongueur_L
-                termine = "A CANDIDATE SEQUENCE FOR A BLAST SEARCH AGAINST THE DB MUST BE SHORTER "
+                termine = "A CANDIDATE SEQUENCE FOR A BLAST SEARCH AGAINST THE DB MUST BE SHORTER (max bp $borne_longueur_sup)"
                 S = "help: enter  ?length in the fasta form"
             else
                 fairearbre= true
                 if decisonlongueur_l == false
-                    termine = "TREE WILL NOT BE BUILT: BLAST ONLY "
-                    S = " THE LENGTH OF THE QUERY IS INADEQUATE FOR PHYLOGENY BLAST ONLY"
+                    termine = "TREE WILL NOT BE BUILT: BLAST ONLY  (min bp $borne_longueur_inf)"
+                    #S = " THE LENGTH OF THE QUERY IS INADEQUATE FOR PHYLOGENY BLAST ONLY"
                     #temporisation ici 
                     sleep(2)
                     fairearbre= false
@@ -480,8 +482,8 @@ function ui()  #btn("valider",color="red",@click("press_btn = true")), # @onbutt
     #     p("fasta est {{N}} de longueur is {{m}}") # random numbers is {{m}}
     # ])
     #[btn("Trigger action", @click(:trigger)),p("{{m}}")]
-    [cell([h1("Prokaryotes Phylogenetics Explorer [nuc]")])#toolbar("Configuration", class = "bg-primary text-white shadow-2")
-    cell([h6("LBBE UMR5558 Université Lyon1-CNRS")])
+    [cell([h1("Prokaryotes Phylogenetics Explorer [nuc] Workshop")])#toolbar("Configuration", class = "bg-primary text-white shadow-2")
+    cell([h6("LBBE UMR5558 Université Lyon1-CNRS & Master bioinfo@lyon Université Lyon1"),  a(href="https://github.com/jpflandrs/PkXplore","Code")])
     separator(color = "primary")
     p(h5("Global Parameters"))
     #cell([h5("Global Parameters")])
