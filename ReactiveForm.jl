@@ -304,7 +304,7 @@ using DataFrames
                         termine = "Trimming running"
                         #println("306",estalign)
                         fasta_trimé,listkopf,transposée_msa = trim(estalign,0.1) #la fonction est coupée en deux pour permettre le greffage de la sélection de tranche
-                        #println("308",fasta_trimé)
+                        
 
                         matricetrimtransposée = copy(transposée_msa) #important pour éviter les modifications NB matrice après trimming seulement (on détruit la matrice initiale)
                         chappe, message, fintrim = retourafasta(1,fasta_trimé,listkopf,matricetrimtransposée) #ancienne fonction etait directe mais il nous faut la matrice transposée pour les tranches à venir
@@ -442,7 +442,7 @@ using DataFrames
     end
 
     @event choixposttrim begin
-        println("dans la selection posttrim")
+        #println("dans la selection posttrim")
         chappe = true
         travail2 = true
         selectionmsainf::Int64 = selectionintervalle.range.start
@@ -454,7 +454,7 @@ using DataFrames
         
         matricetrimtransposée = copy(transposée_msa) #important pour éviter les modifications NB matrice après trimming seulement (on détruit la matrice initiale)
         #println("copiefaite",selectionmsainf,"   ",selectionmsasup,"  ",listkopf)
-        #println(matricetrimtransposée)
+        
         #chappe2,listkopf2,matricetransposée2 = tranchedemsa(a_trimer, 800, 1600, matricetransposée, listkopf)
         chappe,listkopf,transposée_msa2 = tranchedemsa(fasta_trimé,selectionmsainf,selectionmsasup,matricetrimtransposée,listkopf,borne_longueur_inf)#listkopf,matricetrimtransposée
         #print("état ",chappe)
@@ -524,18 +524,18 @@ function ui()  #btn("valider",color="red",@click("press_btn = true")), # @onbutt
             style = "width: 100%"
         )]), @showif("trim_fait_persistant"))
     
-        ######################################
+    ######################################
     Html.div(cell([h5("Select a zone and redo"), Stipple.range(
             0:1:100,
             :selectionintervalle,
             markers = true,
-            #var:"marker-labels" = true,
+            label = true,#labelalways = true
             color = raw"secondary"
-            ) ,cell(["Tranche info: {{selectionmsainf}}% - {{selectionmsasup}}%"]), 
-            #btn("Select Slice", @click(:choixposttrim), loading = :travail2, color = "secondary")]), 
+            ) ,
+            #cell(["Tranche info: {{selectionmsainf}}% - {{selectionmsasup}}%"]),  
             btn("Select", @on(:click,:choixposttrim), loading = :travail2, color = "secondary")]),
             @showif("trim_fait"))
-        #########################################
+    #########################################
     Html.div(cell([h5("Selected Slice of Trimmed Alignment"), h6("Slice {{selectionmsainf}}% - {{selectionmsasup}}%"), imageview(
             src = :seaview_sel,
             style = "width: 100%"
