@@ -328,16 +328,16 @@ end
 
 #An aera has been selected, we adjust the MSA to the cut-off -> 
 
-function tranchedemsa(a_trimer::String,debut::Int64,fin::Int64,matricetransposée::Vector{Vector{Char}},listkopf::Vector{String})
+function tranchedemsa(a_trimer::String,debut::Int64,fin::Int64,matricetransposée::Vector{Vector{Char}},listkopf::Vector{String},borne_longueur_inf::Int64)
     chappe::Bool = true #le télégraphe Chappe :)
     #verifications basiques
-    
+    #println("in tranche ",borne_longueur_inf)
     
     debut=round((length(matricetransposée)/100)*debut)
     fin=round((length(matricetransposée)/100)*fin)
     dimention=fin-debut
     #println(tranchedemsa,"  ",dimention)
-    if dimention < 300
+    if dimention < borne_longueur_inf
         chappe = false
         return chappe,listkopf,matricetransposée
     end

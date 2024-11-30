@@ -33,6 +33,7 @@ using DataFrames
     @out selectionmsainf=0
     @out selectionmsasup=100
     @out drapeau_tranche::Bool = false
+    @out état::Bool = true
     ############################
     # 0:5:100,
     # :selectionintervalle,
@@ -48,29 +49,7 @@ using DataFrames
     # end
         #@in paramètres = false
     ############################
-    @onchange banqueselectionnée begin
-        banqueblast = banqueselectionnée
-        if banqueblast == "TRECS_16SrRNA.fst"
-            borne_longueur_inf=800
-            borne_longueur_sup=2200
-        elseif banqueblast == "TRECS_23SrRNA.fst"
-            borne_longueur_inf=1400
-            borne_longueur_sup=4500
-        elseif banqueblast == "TRECS_5SrRNA.fst"
-            borne_longueur_inf=75
-            borne_longueur_sup=200
-        end
-        
-        println("selection :",borne_longueur_inf," ",borne_longueur_sup)
-        
-    end
-    @onchange requestedseq begin
-        limitedsearch = requestedseq
-        #println(requestedseq," help seq",  banqueblast,"  ",limitedsearch)
-        # println("RM :",requestedseq," ",typeof(requestedseq))
-        #println("selection :",limitedsearch," ",typeof(limitedsearch))
-        #paramètres = true
-    end
+    
     
     @out travail = false
     @out travail2 = false
@@ -122,7 +101,30 @@ using DataFrames
     @out borne_longueur_inf = 600 #dépend de la banque ici 16S
     @out borne_longueur_sup = 2500
     @out pourgzip = ""
+
+    @onchange banqueselectionnée begin
+        banqueblast = banqueselectionnée
+        if banqueblast == "TRECS_16SrRNA.fst"
+            borne_longueur_inf=800
+            borne_longueur_sup=2200
+        elseif banqueblast == "TRECS_23SrRNA.fst"
+            borne_longueur_inf=1400
+            borne_longueur_sup=4500
+        elseif banqueblast == "TRECS_5SrRNA.fst"
+            borne_longueur_inf=75
+            borne_longueur_sup=200
+        end
+        
+        println("selection :",borne_longueur_inf," ",borne_longueur_sup)
+    end
     
+    @onchange requestedseq begin
+        limitedsearch = requestedseq
+        #println(requestedseq," help seq",  banqueblast,"  ",limitedsearch)
+        # println("RM :",requestedseq," ",typeof(requestedseq))
+        #println("selection :",limitedsearch," ",typeof(limitedsearch))
+        #paramètres = true
+    end
     @onbutton clearit begin
         trigger = false
         iclearit = false
@@ -138,6 +140,11 @@ using DataFrames
         selectionfaite =false
         travail = false
         travail2 = false
+        drapeau_tranche = false
+        #println("cool de ",selectionmsainf," a ",selectionmsasup,"  ",typeof(selectionmsainf))
+        trim_fait = false
+        trim_fait_persistant = false
+        chappe = true
         ddff_pagination = DataTablePagination(rows_per_page = 1)
 
         m = "non actif "
@@ -167,6 +174,7 @@ using DataFrames
         # borne_longueur_sup = 3500
         pourgzip = ""
         matricetrimtransposée::Vector{Vector{Char}}=[]
+        
         
     end
     @onbutton trigger begin
@@ -198,6 +206,7 @@ using DataFrames
         selectionfaite =false
         arbre_fait= false
         figure_arbre_fait= false
+        état = false
         #fin nettoyage
         S=strip(S)
         ddff_pagination = DataTablePagination(rows_per_page = 5)
@@ -214,7 +223,7 @@ using DataFrames
         elseif occursin("?demo:",S)
             termine = "Selection of a demonstrative sequence"
             println(strip(split(S,"demo:")[2]))
-            S = exemples(strip(split(S,"demo:")[2]))
+            S = exemples(banqueblast)
             println(S)
             if S == "pas trouvé"
                 termine = "No corresponding demonstrative sequence"
@@ -222,7 +231,7 @@ using DataFrames
             end
         elseif occursin('?',S)
             termine = "See help in the fasta box"
-            S = "The PK Phylogeny Explorer works on nucleic sequences only\nFasta format is :\n>sequence_information\nATCGGCT....TNTCGGATT\n\n"
+            S = "The PK Phylogeny Explorer works on nucleic sequences only\nFasta format is :\n>sequence_information\nATCGGCT....TNTCGGATT\n?demo : demonstratives sequences ?length : lengh requirement to reconstruct phylogeny \n"
         elseif validate_fasta_nucleic(S,true) == false
             if validate_fasta_proteic(S,true) == true
                 termine = "SEEMS TO BE A PROTEIN SEQUENCE, ONLY NUCLEIC HERE"
@@ -433,8 +442,8 @@ using DataFrames
     end
 
     @event choixposttrim begin
-        #println("dans la selection posttrim")
-        #travail = true
+        println("dans la selection posttrim")
+        chappe = true
         travail2 = true
         selectionmsainf::Int64 = selectionintervalle.range.start
         selectionmsasup::Int64 = selectionintervalle.range.stop
@@ -447,30 +456,34 @@ using DataFrames
         #println("copiefaite",selectionmsainf,"   ",selectionmsasup,"  ",listkopf)
         #println(matricetrimtransposée)
         #chappe2,listkopf2,matricetransposée2 = tranchedemsa(a_trimer, 800, 1600, matricetransposée, listkopf)
-        chappe,listkopf,transposée_msa2 = tranchedemsa(fasta_trimé,selectionmsainf,selectionmsasup,matricetrimtransposée,listkopf)#listkopf,matricetrimtransposée
-        #println("fait 400","  ",chappe)
+        chappe,listkopf,transposée_msa2 = tranchedemsa(fasta_trimé,selectionmsainf,selectionmsasup,matricetrimtransposée,listkopf,borne_longueur_inf)#listkopf,matricetrimtransposée
+        #print("état ",chappe)
+        if chappe#println("fait 400","  ",chappe)
         #chappe, message, posttrimmage = retourafasta(2,"/Users/jean-pierreflandrois/Documents/PkPhyExplo/public/utilisateurs/task_20241019_124721_rM2TmZbG/atelier_20241019_124721_rM2TmZbG/alignement_finale.fasta",listkopf2,matricetransposée2)
-        chappe, message, fintrim = retourafasta(2,fasta_trimé,listkopf,transposée_msa2)#ancienne fonction etait directe mais il nous faut la matrice transposée pour les tranches à venir
-        #println("fait 403"," ",chappe,"  ",fintrim)
-        #println(chappe,"***",message)
-        # trim_fait = true
-        selectionfaite =true
-        #println("--- FIN ---")
-        seaview_sel = panoramatographe_nuc(replace(fintrim,".sth" =>".fasta"),replace(fintrim,".sth" =>""),1)
-        seaview_sel = split(seaview_sel,"public/")[2]
-        #chappe2,listkopf2,matricetransposée2 = tranchedemsa(a_trimer, 800, 1600, matricetransposée, listkopf)
-        #chappe, message, posttrimmage = retourafasta(2,"/Users/jean-pierreflandrois/Documents/PkPhyExplo/public/utilisateurs/task_20241019_124721_rM2TmZbG/atelier_20241019_124721_rM2TmZbG/alignement_finale.fasta",listkopf2,matricetransposée2)
-        #panoramatographe_nuc(replace(posttrimmage,"sth" => "fasta"),replace(posttrimmage,"sth" => "image"),4)
-        #faitrapidnj(posttrimmage)
-        
-        #p("retour trim $fintrim")
-        termine = "Tree constuction"
-        rapidnj=faitrapidnj(fintrim)
-        baumist_sel=split(rapidnj,"public/")[2]
-        figure_arbre_fait = true
-        termine = " Tree available "#*baumist_sel
-        montre_moi_tirer = true
-        #travail = false
+            chappe, message, fintrim = retourafasta(2,fasta_trimé,listkopf,transposée_msa2)#ancienne fonction etait directe mais il nous faut la matrice transposée pour les tranches à venir
+            #println("fait 403"," ",chappe,"  ",fintrim)
+            #println(chappe,"***",message)
+            # trim_fait = true
+            selectionfaite =true
+            #println("--- FIN ---")
+            seaview_sel = panoramatographe_nuc(replace(fintrim,".sth" =>".fasta"),replace(fintrim,".sth" =>""),1)
+            seaview_sel = split(seaview_sel,"public/")[2]
+            #chappe2,listkopf2,matricetransposée2 = tranchedemsa(a_trimer, 800, 1600, matricetransposée, listkopf)
+            #chappe, message, posttrimmage = retourafasta(2,"/Users/jean-pierreflandrois/Documents/PkPhyExplo/public/utilisateurs/task_20241019_124721_rM2TmZbG/atelier_20241019_124721_rM2TmZbG/alignement_finale.fasta",listkopf2,matricetransposée2)
+            #panoramatographe_nuc(replace(posttrimmage,"sth" => "fasta"),replace(posttrimmage,"sth" => "image"),4)
+            #faitrapidnj(posttrimmage)
+            
+            #p("retour trim $fintrim")
+            termine = "Tree constuction"
+            rapidnj=faitrapidnj(fintrim)
+            baumist_sel=split(rapidnj,"public/")[2]
+            figure_arbre_fait = true
+            termine = " Tree available "#*baumist_sel
+            montre_moi_tirer = true
+            #travail = false
+        else
+            termine = "Invalid length for the selection (<$borne_longueur_inf), redo and select a larger window"
+        end
         travail2 = false
     end 
 
