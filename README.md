@@ -1,19 +1,24 @@
 # PkXplore
 
-## In short
+## The Prokaryotes Phylogenetics Explorer Workshop in short
 
 This is a small explorer of the phylogeny of Bacteria and Archaea (aka Prokaryotes, Pk) based on the nucleic sequences of some rDNA genes (16S only in this demontration). 
-You may play with [the website](https://pkxplore.univ-lyon1.fr/nucworkshop).
+You may play with [the WEBSITE](https://pkxplore.univ-lyon1.fr/nucworkshop). Have a look also to [MSGlimpse](https://github.com/jpflandrs/MSGlimpse/blob/main/README.md).
 The whole project will include 23S and 5S rDNA and some frequently nucleic sequences databases of proteins like DNA-directed RNA polymerase β (rpoB) and Elongation Factor Tu (tuf) or groEL chaperonins.
 A version devoted to protein will appear if I have some time left.
 Note that the program is still in developpment even if it is fully functionnal.
+
+## Projects
+
+- A version devoted to protein sequences is planned, may be in the [riboDB](https://umr5558-proka.univ-lyon1.fr/riboDB/ribodb.cgi) context.
+- [riboDB](https://umr5558-proka.univ-lyon1.fr/riboDB/ribodb.cgi) will be hosted here soon.
 
 ## Aim
 
 The website is oriented toward teaching/learning the basic use of phylogeny
 
 - To quickly and easily discover the various phases of a phylogenetic study
- - T hen the same process can be done again with other methods by using the downloaded data
+ - Then the same process can be done again with other methods by using the downloaded data
  - To discover the relations between Bacteria and Archaea species.
 
 It is also a way to explain some aspect of the analysis of bacteria communities (metagenome analysis).
