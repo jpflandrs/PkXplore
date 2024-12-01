@@ -25,16 +25,34 @@ function validate_fasta_proteic(sequence::String, is_proteic::Bool)
     return match(pattern, sequence) !== nothing
 end
 
-function uniqueutilisateur()
-    timestamp = Dates.format(now(), "yyyymmdd_HHMMSS")
-    random_string = randstring(8)  # 8-character random string
-    fichtempo =  joinpath(pwd(),"public","utilisateurs","task_$(timestamp)_$(random_string)")
-    mkdir(fichtempo)
-    atelier=joinpath(fichtempo,"atelier_"*timestamp*"_"*random_string)
-    mkdir(atelier)
-    #resu=faitblast(data,fichtempo)
+function renvoieepoch()
+    dte=datetime2epoch(x::DateTime) = (Dates.value(x) - Dates.UNIXEPOCH)
+    return dte(now())
+end
 
+function uniqueutilisateur()
+    timestamp::String=string(renvoieepoch())
+    random_string::String = randstring(8)  # 8-char random
+    fichtempo::String =  joinpath(pwd(),"public","utilisateurs","task_$(timestamp)_$(random_string)")
+    mkdir(fichtempo)
+    atelier::String=joinpath(fichtempo,"atelier_"*timestamp*"_"*random_string)
+    mkdir(atelier)
+    putzen(joinpath(pwd(),"public","utilisateurs"))
     return atelier
+end
+
+function putzen(classeur::String)
+    
+    monclasseur::Vector{String}=readdir(classeur,join=true)
+    timestamp::Int64=renvoieepoch()
+    for u in monclasseur
+        if occursin("task",u)
+            #println(u," ",parse(Int64,split(u,'_')[2])-timestamp) #tester
+            if timestamp - parse(Int64,split(u,'_')[2]) >3600000
+                rm(u, recursive=true)
+            end
+        end
+    end
 end
 
 function compresser(classeur_utilisateur) #intermédiaire de zippp (oui 3 p) pour travailler dans le directory utilisateur 

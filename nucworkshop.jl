@@ -557,7 +557,7 @@ function ui()  #btn("valider",color="red",@click("press_btn = true")), # @onbutt
 
 end
 
-@page("/reactive", ui)
+@page("/nucworkshop", ui)
 end
 
 # Stipple.range(
