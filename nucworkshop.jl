@@ -53,6 +53,7 @@ using DataFrames
     
     @out travail = false
     @out travail2 = false
+    @in testing = false
     @in ddff_pagination = DataTablePagination(rows_per_page = 1)
 
     @out m = "non actif "
@@ -104,6 +105,7 @@ using DataFrames
 
     @onchange banqueselectionnée begin
         banqueblast = banqueselectionnée
+        # testing = false
         if banqueblast == "TRECS_16SrRNA.fst"
             borne_longueur_inf=800
             borne_longueur_sup=2200
@@ -115,9 +117,22 @@ using DataFrames
             borne_longueur_sup=200
         end
         
-        println("selection :",borne_longueur_inf," ",borne_longueur_sup)
+        #println("selection :",borne_longueur_inf," ",borne_longueur_sup)
     end
     
+    @onchange testing begin
+        if testing == true
+            listebanques = ["TRECS_16SrRNA.fst"]
+            banqueblast = "TRECS_16SrRNA.fst"
+            banqueselectionnée = banqueblast
+            borne_longueur_inf=800
+            borne_longueur_sup=2200
+            S=">test16S\nAAACCGGTTGATCCTGCCGGACCCGACCGCTATCGGGGTGGGGCTAAGCCATGCGAGTCGTACGCCCGGGGACCGCCGGGCGTGGCGCACGGCTCAGTAACACGTGCCTAACCTACCCTCGGGAGGGAGATAACCCCGGGAAACTGGGGCTAATCCCCCACAGGAGAGGGCGCTGGAAGGCCCCTTCTCCGAAATGGATTACGGCCGATCTGCCGCAATCCGCCCGAGGATGGGGGCACGGCCCATCATGGTAGTTGGCGGGGTAACGGCCCGCCAAGCCGAAGACGGGTGGGGGCCGTGAGAGCGGGAGCCCCGAGATGGGCACTGAGACAAGGGCCCAGGCCCTACGGGGTGCAGCAGGCGCGAAAACTCCGCAATGCGGGAAACCGTGACGGGGCCACCCCGAGTGCCGCCCGAAGAGGGCGGCTTTTGCCCGGTGCAAAAAGCCGGGCGAATAAGCGGGGGGCAAGTCTGGTGTCAGCCGCCGCGGTAATACCAGCCCCGCGAGTGGTCGGGGTGCTTACTGGGCCTAAAGCGCCCGTAGCCGGCCCGGTAAGTCGCCCCTGAAATCCACGGGCTCAACCCGTGGGCTGGGGGCGAAACTGCCGGGCTTGGGGGCGGGAGAGGCCGAGGGTACTCCCGGGGTAGGGGCGAAATCCGATAATCCCGGGAGGACCACCAGTGGCGAAGGCGCTCGGCTGGAACGCGCCCGACGGTGAGGGGCGAAAGCTGGGGGAGCAAAGGGGATTAGATACCCCTGTAGTCCCAGCTGTAAACTATGCGGGCCAGCTGTTGGACGGGCTTAGAGCCCGCCCAGTGGCGGAGGGAAGCCGTTAAGCCCGCCGCCTGGGGAGTACGGCCGCAAGGCTGAAACTTAAAGGAATTGGCGGGGGGGCACCACAAGGGGTGAAGCTTGCGGCTTAATTGGAGTCAACGCCGGAAACCTTACCCGGGGCGACAGCAGGATGATGGCCAGGCTAACGACCTTGCCGGACGAGCTGAGAGGAGGTGCATGGCCGTCGTCAGCTCGTGCCGCGAGGTGTCCGGTTAAGTCCGGCAACGAGCGAGACCCCCACCCCTAGTTGCTACCCGGTCCTTCGGGACCGGGGGCACACTAGGGGGACTGCCGGCGTAAGCCGGAGGAAGGAGGGGGCCACGGCAGGTCAGTATGCCCCGAAACCCCGGGGCTGCACGCGAGCTGCAATGGCGGGGACAGCGGGATCCGACCCCGAAAGGGGAAGGCAATCCCGTAAACCCCGCCCCAGTAGGGATCGAGGGCTGCAACTCGCCCTCGTGAACGTGGAATCCCTAGTAACCGCGTGTCACCAACGCGCGGTGAATACGTCCCTGCCCCTTGCACACACCGCCCGTCGCGCCACCCGAGGGAGCCCCCAACGAGGCCTCTTCTTTCCAGGGTAACCCCCTGGGGAGGGGAGGACGAGTTGGGGGCTCCCGAGGGGGGCGAAGTCGTAACAAGGTGGCCGTAGGGGAACCTGCGGCCGGATCACCTCCT"
+        else 
+            S=""
+            listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
+        end
+    end
     @onchange requestedseq begin
         limitedsearch = requestedseq
         #println(requestedseq," help seq",  banqueblast,"  ",limitedsearch)
@@ -125,6 +140,7 @@ using DataFrames
         #println("selection :",limitedsearch," ",typeof(limitedsearch))
         #paramètres = true
     end
+
     @onbutton clearit begin
         trigger = false
         iclearit = false
@@ -140,11 +156,15 @@ using DataFrames
         selectionfaite =false
         travail = false
         travail2 = false
+        selectionintervalle = RangeData(0:100)
+        selectionmsainf=0
+        selectionmsasup=100
         drapeau_tranche = false
         #println("cool de ",selectionmsainf," a ",selectionmsasup,"  ",typeof(selectionmsainf))
         trim_fait = false
         trim_fait_persistant = false
         chappe = true
+        testing = false
         ddff_pagination = DataTablePagination(rows_per_page = 1)
 
         m = "non actif "
@@ -380,62 +400,62 @@ using DataFrames
             seekstart(io)
             download_binary(__model__,take!(io), pourgzip)
             downloadinfo = "Done !"
-            #on va maintenant vider l'écran
-            trigger = false
-            iclearit = false
-            download_event = false
-            montre_moi_tirer = false
-            blast_fait= false
-            collect_fait= false
-            align_fait= false
-            trim_fait= false
-            trim_fait_persistant= false
-            selectionfaite =false
-            arbre_fait= false
-            figure_arbre_fait= false
-                #banqueblast = ""
-                #banqueselectionnée="TRECS_16SrRNA.fst"
-                    # @out listofbanques = ""
-                #listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst"]
-                #choixbanque = false
-                #requestedseq = 50
-                #limitedsearch = 50
-                #paramètres = false
-            travail = false
+            # #on va maintenant vider l'écran
+            # trigger = false
+            # iclearit = false
+            # download_event = false
+            # montre_moi_tirer = false
+            # blast_fait= false
+            # collect_fait= false
+            # align_fait= false
+            # trim_fait= false
+            # trim_fait_persistant= false
+            # selectionfaite =false
+            # arbre_fait= false
+            # figure_arbre_fait= false
+            #     #banqueblast = ""
+            #     #banqueselectionnée="TRECS_16SrRNA.fst"
+            #         # @out listofbanques = ""
+            #     #listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst"]
+            #     #choixbanque = false
+            #     #requestedseq = 50
+            #     #limitedsearch = 50
+            #     #paramètres = false
+            # travail = false
         
-            ddff_pagination = DataTablePagination(rows_per_page = 1)
+            # ddff_pagination = DataTablePagination(rows_per_page = 1)
 
-            m = "non actif "
-            S = ""
-            p = ""
-            resu= ()
-            BL=([],[],[],"")
+            # m = "non actif "
+            # S = ""
+            # p = ""
+            # resu= ()
+            # BL=([],[],[],"")
             
-            downloadinfo = "not Ready"
-            genomeid = []
-            nomslongs = []
-            scores = []
-            evalues = []
-            fichierfasta = ""
+            # downloadinfo = "not Ready"
+            # genomeid = []
+            # nomslongs = []
+            # scores = []
+            # evalues = []
+            # fichierfasta = ""
             
-            estalign = ""
-            fintrim = ""
-            termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
-            ddff = DataTable(DataFrame(SpeciesGenome=lataxinomie,GenomeId=genomeid,Quality=qualité,Scores=scores,Evalue=evalues,Ali_Length=ali_length,Nb_identity=IdentityNumber,Identity=identitypc,GapsOpen=gapsopen))
-            #Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]
-             #genomeid,lataxinomie,qualité,evalues,scores,ali_length,identitynumber,identitypc,gapsopen,fichierfasta
-            baumist = ""
-            seaview_a = ""
-            seaview_b = ""
-            seaview_c = ""
-            borne_longueur_inf = 600
-            borne_longueur_sup = 3500
-            pourgzip = ""
-            matricetrimtransposée::Vector{Vector{Char}}=[]
-            ################  et maintenant détruire le classeur utilisateur #################
-            #rm(posdsk, recursive=true, force=true)
-            #vider l'information correspondante
-            posdsk ="waiting for the link"
+            # estalign = ""
+            # fintrim = ""
+            # termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
+            # ddff = DataTable(DataFrame(SpeciesGenome=lataxinomie,GenomeId=genomeid,Quality=qualité,Scores=scores,Evalue=evalues,Ali_Length=ali_length,Nb_identity=IdentityNumber,Identity=identitypc,GapsOpen=gapsopen))
+            # #Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]
+            #  #genomeid,lataxinomie,qualité,evalues,scores,ali_length,identitynumber,identitypc,gapsopen,fichierfasta
+            # baumist = ""
+            # seaview_a = ""
+            # seaview_b = ""
+            # seaview_c = ""
+            # borne_longueur_inf = 600
+            # borne_longueur_sup = 3500
+            # pourgzip = ""
+            # matricetrimtransposée::Vector{Vector{Char}}=[]
+            # ################  et maintenant détruire le classeur utilisateur #################
+            # #rm(posdsk, recursive=true, force=true)
+            # #vider l'information correspondante
+            # posdsk ="waiting for the link"
         catch ex
             println("Error during download: ",ex)
         end
@@ -450,7 +470,7 @@ using DataFrames
         drapeau_tranche = true
         #println("cool de ",selectionmsainf," a ",selectionmsasup,"  ",typeof(selectionmsainf))
         trim_fait = false
-        trim_fait_persistant= true
+        trim_fait_persistant = true
         
         matricetrimtransposée = copy(transposée_msa) #important pour éviter les modifications NB matrice après trimming seulement (on détruit la matrice initiale)
         #println("copiefaite",selectionmsainf,"   ",selectionmsasup,"  ",listkopf)
@@ -507,7 +527,11 @@ function ui()  #btn("valider",color="red",@click("press_btn = true")), # @onbutt
         ])
     cell([separator(color = "primary")])
         
-    cell(h5("Query"),[textfield(type="textarea","sequence fasta ?", :S),btn("Submit", @click(:trigger),loading =:travail,color = "secondary"),btn("Clear", @click(:clearit))])
+    row([
+        column(class="q-pa-sm",cell([h5("Query")]), sm=6),
+        column(class="q-pa-sm",cell([toggle("Test sequence", :testing)]), sm=6),
+        ])
+    cell([textfield(type="textarea","sequence fasta ?", :S),btn("Submit", @click(:trigger),loading =:travail,color = "secondary"),btn("Clear", @click(:clearit))])
         
     cell(["Process info: {{termine}}"])
         Html.div(cell([h5("Blast against DB:{{banqueselectionnée}}"),table(:ddff, paginationsync = :ddff_pagination, flat = true, bordered = true, title = "BLAST")]), @showif("blast_fait") )
