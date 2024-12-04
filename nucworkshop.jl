@@ -33,7 +33,7 @@ using DataFrames
     @out selectionmsainf=0
     @out selectionmsasup=100
     @out drapeau_tranche::Bool = false
-    @out état::Bool = true
+    
     ############################
     # 0:5:100,
     # :selectionintervalle,
@@ -60,15 +60,12 @@ using DataFrames
     @in S = ""
     @out p = ""
     @out resu= ()
-    #@out BL=([],[],[],"")
 
     @in posdsk::String ="waiting for the link"
     @in downloadinfo::String = "not Ready"
     #@out genomeid = []
     @out genomeid::Vector{String}=[]
-    @out vecteurtetes::Vector{String}=[]
-    @out scoredivers::Vector{Tuple{SubString{String}, SubString{String}}}=[] # genomeid,vecteurtetes,scoredivers,fichierfasta
-    ##ajoutscar :  vecteurtetescoupees,lataxinomie,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
+
     @out lataxinomie::Vector{String}=[]
     @out qualité::Vector{String}=[]
     @out ali_length::Vector{Int64}=[]
@@ -77,8 +74,8 @@ using DataFrames
     @out gapsopen::Vector{Int64}=[]
 
     @out fichierfasta::String = ""
-    @out sscores::Vector{Int64}=[]
-    @out evalue::Vector{Float64}=[]
+    # @out sscores::Vector{Int64}=[]
+    @out evalues::Vector{Float64}=[]
 
     #@out fichierfasta = ""
     @out estalign = ""
@@ -142,137 +139,72 @@ using DataFrames
     end
 
     @onbutton clearit begin
-        trigger = false
-        iclearit = false
-        download_event = false
-        montre_moi_tirer = false
-        blast_fait= false
-        collect_fait= false
+        ali_length=[]
         align_fait= false
-        trim_fait= false
-        trim_fait_persistant= false
         arbre_fait= false
-        figure_arbre_fait= false
-        selectionfaite =false
-        travail = false
-        travail2 = false
-        selectionintervalle = RangeData(0:100)
-        selectionmsainf=0
-        selectionmsasup=100
-        drapeau_tranche = false
-        #println("cool de ",selectionmsainf," a ",selectionmsasup,"  ",typeof(selectionmsainf))
-        trim_fait = false
-        trim_fait_persistant = false
-        chappe = false
-        testing = false
-        ddff_pagination = DataTablePagination(rows_per_page = 1)
-
-        m = "non actif "
-        S = ""
-        p = ""
-        resu= ()
-        BL=([],[],[],"")
-        posdsk ="waiting for the link"
-        downloadinfo = "not Ready"
-        genomeid = []
-        nomslongs = []
-        scores = []
-        evalues = []
-        fichierfasta = ""
-        
-        estalign = ""
-        fintrim = ""
-        termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
-        ddff = DataTable(DataFrame(SpeciesGenome=String["no data157"],GenomeId=String["no data"],Quality=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]))
+        banqueblast = "TRECS_16SrRNA.fst"
+        banqueselectionnée = "TRECS_16SrRNA.fst"
+        borne_longueur_inf = 800
+        borne_longueur_sup = 2000
         baumist = ""
+        baumist_sel = ""
+        blast_fait= false
+        chappe = false
+        choixposttrim = false
+        clearit = false
+        collect_fait= false
+        ddff = DataTable(DataFrame(SpeciesGenome=String["no data157"],GenomeId=String["no data"],Quality=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]))
+        ddff_pagination = DataTablePagination(rows_per_page = 1)
+        download_event = false
+        downloadinfo = "not Ready"
+        drapeau_tranche = false
+        estalign = ""
+        evalue=[]
+       
+        fasta_trimé =""
+        fichierfasta = ""
+        figure_arbre_fait= false
+        fintrim = ""
+        gapsopen=[]
+        genomeid = []
+        iclearit = false
+        identitynumber=[]
+        identitypc=[]
+        lataxinomie=[]
+        limitedsearch = 50
+        listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
+        listkopf::Vector{String}=[]
+        m = "non actif "
+        matricetranchetransposee =[] #la matrice transposée en cas de selection d'une tranche dans le MSA
+        matricetransposee =[] #la matrice transposée initiale après trimming
+        matricetrimtransposée::Vector{Vector{Char}}=[]
+        matricetrimtransposée=[]
+        message = ""
+        montre_moi_tirer = false
+        p = ""
+        posdsk ="waiting for the link"
+        pourgzip = ""
+        qualité=[]
+        requestedseq = 50
+        resu= ()
+        S = ""
+        scores = []
         seaview_a = ""
         seaview_b = ""
         seaview_c = ""
         seaview_sel = ""
-        baumist_sel = ""
-        # borne_longueur_inf = 600
-        # borne_longueur_sup = 3500
-        pourgzip = ""
-        matricetrimtransposée::Vector{Vector{Char}}=[]
-        ###
-        # travail = false
-        # travail2 = false
-        # testing = false
-        # ddff_pagination = DataTablePagination(rows_per_page = 1)
-
-        # m = "non actif "
-        # S = ""
-        # p = ""
-        # resu= ()
-        # posdsk ="waiting for the link"
-        # downloadinfo = "not Ready"
-        # #genomeid = []
-        # genomeid=[]
-        # vecteurtetes=[]
-        # scoredivers=[] # genomeid,vecteurtetes,scoredivers,fichierfasta
-        # ##ajoutscar :  vecteurtetescoupees,lataxinomie,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
-        # lataxinomie=[]
-        # qualité=[]
-        # ali_length=[]
-        # identitynumber=[]
-        # identitypc=[]
-        # gapsopen=[]
-
-        # fichierfasta = ""
-        # sscores=[]
-        # evalue=[]
-
-        # #fichierfasta = ""
-        # estalign = ""
-        # fasta_trimé =""
-        # fintrim = ""
-        # chappe::Bool = false
-        # message = ""
-        # termine = "Ready for a new submission"
-        # #listedesaextraire,lataxinomie,laqualite,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
-        # ddff = DataTable(DataFrame(SpeciesGenome=String["no data101"],GenomeId=String["no data"],Quality=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]))# sseqid           stitle                             evalue   bitscore  length  nident  pident   gapopen
-        # matricetransposee::Vector{Vector{Char}} =[] #la matrice transposée initiale après trimming
-        # transposée_msa::Vector{Vector{Char}} =[]
-        # matricetranchetransposee::Vector{Vector{Char}} =[] #la matrice transposée en cas de selection d'une tranche dans le MSA
-        # listkopf::Vector{String}=[]
-        # baumist = ""
-        # baumist_sel = ""
-        # seaview_a = ""
-        # seaview_b = ""
-        # seaview_c = ""
-        # seaview_sel = ""
-        # borne_longueur_inf = 600 #dépend de la banque ici 16S
-        # borne_longueur_sup = 2500
-        # pourgzip = ""
-
-        # trigger = false
-        # clearit = false
-        # choixposttrim = false
-        # download_event = false
-        # montre_moi_tirer = false
-        # blast_fait= false
-        # collect_fait= false
-        # align_fait= false
-        # trim_fait= false
-        # trim_fait_persistant= false
-        # arbre_fait= false
-        # figure_arbre_fait= false
-        # selectionfaite =false
-        # banqueblast = "TRECS_16SrRNA.fst"
-        # termine = "Blast running"
-        # banqueselectionnée = "TRECS_16SrRNA.fst"
-        # # @out listofbanques = ""
-        # listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
-        # borne_longueur_inf=800
-        # borne_longueur_sup=2000
-        # requestedseq = 50
-        # limitedsearch = 50
-        # selectionintervalle = RangeData(0:100)
-        # selectionmsainf=0
-        # selectionmsasup=100
-        # drapeau_tranche::Bool = false
-        # état::Bool = true
-        # ###
+        selectionfaite =false
+        selectionintervalle = RangeData(0:100)
+        selectionmsainf=0
+        selectionmsasup=100
+        termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
+        testing = false
+        transposée_msa =[]
+        travail = false
+        travail2 = false
+        trigger = false
+        trim_fait_persistant= false
+        trim_fait= false
         
     end
     @onbutton trigger begin
@@ -281,7 +213,7 @@ using DataFrames
         posdsk ="waiting for the link"
         downloadinfo = "not Ready"
         genomeid = []
-        nomslongs = []
+        
         scores = []
         evalues = []
         fichierfasta = ""
@@ -304,7 +236,7 @@ using DataFrames
         selectionfaite =false
         arbre_fait= false
         figure_arbre_fait= false
-        état = false
+        
         #fin nettoyage
         S=strip(S)
         ddff_pagination = DataTablePagination(rows_per_page = 5)
@@ -372,15 +304,7 @@ using DataFrames
                 termine = "Blast running and collecting similar sequences"
                 #println(typeof(p),p," ** ** ", typeof(posdsk),posdsk)
                 genomeid,lataxinomie,qualité,evalues,scores,ali_length,identitynumber,identitypc,gapsopen,fichierfasta = faitblast(banqueblast,p,posdsk,limitedsearch) ##listedesaextraire,lataxinomie,laqualite,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
-                # BL = faitblast(banqueblast,p,posdsk,limitedsearch)
-                # if BL[1] ≠ [] #No hits found
-                #     fichierfasta=BL[4]
-                #     genomeid = BL[1]
-
-                #     for u in 1:length(genomeid)
-                #         push!(scores,BL[3][u][1])
-                #         push!(evalues,BL[3][u][2])
-                #     end
+                
                 if genomeid ≠ [] #No hits found
                     # fichierfasta=collection_avec_query
                     # genomeid = vecteurtetescoupees
@@ -388,31 +312,32 @@ using DataFrames
                     ddff = DataTable(DataFrame(SpeciesGenome=lataxinomie,GenomeId=genomeid,Quality=qualité,Scores=scores,Evalue=evalues,Ali_length=ali_length,Nb_Identity=identitynumber,Identity=identitypc,GapsOpen=gapsopen))# rempplir DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],ali_length=String["NAN"],identitynumber=String["NAN"],identitypc=String["NAN"],gapsopen=String["NAN"]))
                     blast_fait = true
                   
-                    if fairearbre #on fait l'alignement et l'arbre initial avec le trimming 0.1 habituel
-                        seaview_a = panoramatographe_nuc(fichierfasta,replace(fichierfasta,".fasta" =>""),1)#(entree::String,sortie::String,cotécarré::Int)
-                        seaview_a = split(seaview_a,"public/")[2]
-                        collect_fait = true
-                        termine = "Alignment running"
-                        estalign = alignement(fichierfasta)
-                        align_fait = true
-                        termine = "Alignment viewer"
-                        seaview_b = panoramatographe_nuc(estalign,replace(estalign,".fasta" =>""),1)#(entree::String,sortie::String,cotécarré::Int)
-                        seaview_b = split(seaview_b,"public/")[2]
-                        #println(seaview_b)
-                        termine = "Trimming running"
-                        #println("306",estalign)
-                        fasta_trimé,listkopf,transposée_msa = trim(estalign,0.1) #la fonction est coupée en deux pour permettre le greffage de la sélection de tranche
-                        
+                    #on fait l'alignement et l'arbre initial avec le trimming 0.1 habituel
+                    seaview_a = panoramatographe_nuc(fichierfasta,replace(fichierfasta,".fasta" =>""),1)#(entree::String,sortie::String,cotécarré::Int)
+                    seaview_a = split(seaview_a,"public/")[2]
+                    collect_fait = true
+                    termine = "Alignment running"
+                    estalign = alignement(fichierfasta)
+                    align_fait = true
+                    termine = "Alignment viewer"
+                    seaview_b = panoramatographe_nuc(estalign,replace(estalign,".fasta" =>""),1)#(entree::String,sortie::String,cotécarré::Int)
+                    seaview_b = split(seaview_b,"public/")[2]
+                    #println(seaview_b)
+                    termine = "Trimming running"
+                    #println("306",estalign)
+                    fasta_trimé,listkopf,transposée_msa = trim(estalign,0.1) #la fonction est coupée en deux pour permettre le greffage de la sélection de tranche
+                    
 
-                        matricetrimtransposée = copy(transposée_msa) #important pour éviter les modifications NB matrice après trimming seulement (on détruit la matrice initiale)
-                        chappe, message, fintrim = retourafasta(1,fasta_trimé,listkopf,matricetrimtransposée) #ancienne fonction etait directe mais il nous faut la matrice transposée pour les tranches à venir
-                        #println(chappe,"***",message)
-                        trim_fait = true
-                        trim_fait_persistant= true
-                        seaview_c = panoramatographe_nuc(replace(fintrim,".sth" =>".fasta"),replace(fintrim,".sth" =>""),1)
-                        seaview_c = split(seaview_c,"public/")[2]
-
-                        #p("retour trim $fintrim")
+                    matricetrimtransposée = copy(transposée_msa) #important pour éviter les modifications NB matrice après trimming seulement (on détruit la matrice initiale)
+                    chappe, message, fintrim = retourafasta(1,fasta_trimé,listkopf,matricetrimtransposée) #ancienne fonction etait directe mais il nous faut la matrice transposée pour les tranches à venir
+                    #println(chappe,"***",message)
+                    
+                    seaview_c = panoramatographe_nuc(replace(fintrim,".sth" =>".fasta"),replace(fintrim,".sth" =>""),1)
+                    seaview_c = split(seaview_c,"public/")[2]
+                    trim_fait_persistant = true
+                    #si seulement blast on arrête
+                    if fairearbre
+                        trim_fait= true
                         termine = "Tree constuction"
                         rapidnj=faitrapidnj(fintrim)
                         baumist=split(rapidnj,"public/")[2]
@@ -436,23 +361,8 @@ using DataFrames
                 # #println(S)
                 trigger = false
                 clearit = false
-                # m = "non actif "
-                # p = ""
-                # resu= ()
-                # BL=([],[],[],"")
-                # #posdsk =""
-                # genomeid = []
-                # nomslongs = []
-                # scores = []
-                # evalues = []
-                # fichierfasta = ""
-                # estalign = ""
-                # fintrim = ""
-                # #seaview = ""
-                # limitedsearch= 50
-                #ddff = DataTable(DataFrame(SpeciesGenome=String["no data"],Scores=String["NAN"],Evalue=String["NAN"]))
-                #baumist = ""
-                #println("*************")
+                
+                #introduire la possibilité de blast html plus tard
                 #uploader(label="Upload Image", autoupload=true, multiple=true, method="POST", url="/upload", field__name="img")
                 #/Users/jean-pierreflandrois/Documents/PKDBGENIESTIPPLE/public/utilisateurs/task_20240929_123919_kLVW5Yde
                 #Router.serve_static_file(joinpath(split(posdsk,"public/")[2],"blast.out.html")) #public/Users/jean-pierreflandrois/Documents/PKDBGENIESTIPPLE/public/utilisateurs/task_20240929_133908_PVboKQVF/alignement_assaini.tree.pdf
@@ -478,62 +388,7 @@ using DataFrames
             seekstart(io)
             download_binary(__model__,take!(io), pourgzip)
             downloadinfo = "Done !"
-            # #on va maintenant vider l'écran
-            # trigger = false
-            # iclearit = false
-            # download_event = false
-            # montre_moi_tirer = false
-            # blast_fait= false
-            # collect_fait= false
-            # align_fait= false
-            # trim_fait= false
-            # trim_fait_persistant= false
-            # selectionfaite =false
-            # arbre_fait= false
-            # figure_arbre_fait= false
-            #     #banqueblast = ""
-            #     #banqueselectionnée="TRECS_16SrRNA.fst"
-            #         # @out listofbanques = ""
-            #     #listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst"]
-            #     #choixbanque = false
-            #     #requestedseq = 50
-            #     #limitedsearch = 50
-            #     #paramètres = false
-            # travail = false
-        
-            # ddff_pagination = DataTablePagination(rows_per_page = 1)
-
-            # m = "non actif "
-            # S = ""
-            # p = ""
-            # resu= ()
-            # BL=([],[],[],"")
             
-            # downloadinfo = "not Ready"
-            # genomeid = []
-            # nomslongs = []
-            # scores = []
-            # evalues = []
-            # fichierfasta = ""
-            
-            # estalign = ""
-            # fintrim = ""
-            # termine = "Cleared, Ready for a new submission, Verify the Blast Bank and the number of selected hits"
-            # ddff = DataTable(DataFrame(SpeciesGenome=lataxinomie,GenomeId=genomeid,Quality=qualité,Scores=scores,Evalue=evalues,Ali_Length=ali_length,Nb_identity=IdentityNumber,Identity=identitypc,GapsOpen=gapsopen))
-            # #Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]
-            #  #genomeid,lataxinomie,qualité,evalues,scores,ali_length,identitynumber,identitypc,gapsopen,fichierfasta
-            # baumist = ""
-            # seaview_a = ""
-            # seaview_b = ""
-            # seaview_c = ""
-            # borne_longueur_inf = 600
-            # borne_longueur_sup = 3500
-            # pourgzip = ""
-            # matricetrimtransposée::Vector{Vector{Char}}=[]
-            # ################  et maintenant détruire le classeur utilisateur #################
-            # #rm(posdsk, recursive=true, force=true)
-            # #vider l'information correspondante
-            # posdsk ="waiting for the link"
         catch ex
             println("Error during download: ",ex)
         end
@@ -657,15 +512,15 @@ function ui()  #btn("valider",color="red",@click("press_btn = true")), # @onbutt
         cell(["Download Info: {{downloadinfo}}"]) ]),@showif("montre_moi_tirer"))
     ]
 
-end
 
+end
 @page("/nucworkshop", ui)
+
 end
 
-# Stipple.range(
-        # 0:5:100,
-        # :Range_Markers_r,
-        # markers = true,
-        # var":marker-labels" = "selectionintervalle",
-        # color = "secondary"
-        # )
+#How to make multiple browser windows independent
+# route("/nucworkshop") do                              
+#     model = @init(channel = Stipple.channelfactory())
+#     page(model, ui) |> html
+# end
+

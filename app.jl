@@ -5,8 +5,7 @@ using Main.Analysis
 using GenieFramework.Genie.Requests: postpayload
 
 route("/") do
-    [ h4("Welcome to the fasta analysis module"),
-      a("fasta form", href="/form") ]
+    [ h4("Vous voici sur le serveur PkXplorer") ]
 end
 
 route("/form") do
