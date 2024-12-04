@@ -163,7 +163,7 @@ using DataFrames
         #println("cool de ",selectionmsainf," a ",selectionmsasup,"  ",typeof(selectionmsainf))
         trim_fait = false
         trim_fait_persistant = false
-        chappe = true
+        chappe = false
         testing = false
         ddff_pagination = DataTablePagination(rows_per_page = 1)
 
