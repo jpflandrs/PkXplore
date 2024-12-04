@@ -194,7 +194,85 @@ using DataFrames
         # borne_longueur_sup = 3500
         pourgzip = ""
         matricetrimtransposée::Vector{Vector{Char}}=[]
-        
+        ###
+        # travail = false
+        # travail2 = false
+        # testing = false
+        # ddff_pagination = DataTablePagination(rows_per_page = 1)
+
+        # m = "non actif "
+        # S = ""
+        # p = ""
+        # resu= ()
+        # posdsk ="waiting for the link"
+        # downloadinfo = "not Ready"
+        # #genomeid = []
+        # genomeid=[]
+        # vecteurtetes=[]
+        # scoredivers=[] # genomeid,vecteurtetes,scoredivers,fichierfasta
+        # ##ajoutscar :  vecteurtetescoupees,lataxinomie,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
+        # lataxinomie=[]
+        # qualité=[]
+        # ali_length=[]
+        # identitynumber=[]
+        # identitypc=[]
+        # gapsopen=[]
+
+        # fichierfasta = ""
+        # sscores=[]
+        # evalue=[]
+
+        # #fichierfasta = ""
+        # estalign = ""
+        # fasta_trimé =""
+        # fintrim = ""
+        # chappe::Bool = false
+        # message = ""
+        # termine = "Ready for a new submission"
+        # #listedesaextraire,lataxinomie,laqualite,evalue,scores,ali_length,identitynumber,identitypc,gapsopen,collection_avec_query
+        # ddff = DataTable(DataFrame(SpeciesGenome=String["no data101"],GenomeId=String["no data"],Quality=String["no data"],Scores=String["NAN"],Evalue=String["NAN"],Ali_Length=String["NAN"],IdentityNumber=String["NAN"],Identity=String["NAN"],GapsOpen=String["NAN"]))# sseqid           stitle                             evalue   bitscore  length  nident  pident   gapopen
+        # matricetransposee::Vector{Vector{Char}} =[] #la matrice transposée initiale après trimming
+        # transposée_msa::Vector{Vector{Char}} =[]
+        # matricetranchetransposee::Vector{Vector{Char}} =[] #la matrice transposée en cas de selection d'une tranche dans le MSA
+        # listkopf::Vector{String}=[]
+        # baumist = ""
+        # baumist_sel = ""
+        # seaview_a = ""
+        # seaview_b = ""
+        # seaview_c = ""
+        # seaview_sel = ""
+        # borne_longueur_inf = 600 #dépend de la banque ici 16S
+        # borne_longueur_sup = 2500
+        # pourgzip = ""
+
+        # trigger = false
+        # clearit = false
+        # choixposttrim = false
+        # download_event = false
+        # montre_moi_tirer = false
+        # blast_fait= false
+        # collect_fait= false
+        # align_fait= false
+        # trim_fait= false
+        # trim_fait_persistant= false
+        # arbre_fait= false
+        # figure_arbre_fait= false
+        # selectionfaite =false
+        # banqueblast = "TRECS_16SrRNA.fst"
+        # termine = "Blast running"
+        # banqueselectionnée = "TRECS_16SrRNA.fst"
+        # # @out listofbanques = ""
+        # listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
+        # borne_longueur_inf=800
+        # borne_longueur_sup=2000
+        # requestedseq = 50
+        # limitedsearch = 50
+        # selectionintervalle = RangeData(0:100)
+        # selectionmsainf=0
+        # selectionmsasup=100
+        # drapeau_tranche::Bool = false
+        # état::Bool = true
+        # ###
         
     end
     @onbutton trigger begin
