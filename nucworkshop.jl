@@ -24,7 +24,7 @@ using DataFrames
     @in termine = "Blast running"
     @in banqueselectionnée = "TRECS_16SrRNA.fst"
     # @out listofbanques = ""
-    @in listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
+    @in listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","TRECS_bact_DNADirectedRNAPolymeraseSubunit_β.fst","TRECS_bact_ChaperoninGroeL.fst"]
     @in borne_longueur_inf=800
     @in borne_longueur_sup=2000
     @in requestedseq = 50
@@ -127,7 +127,7 @@ using DataFrames
             S=">test16S\nAAACCGGTTGATCCTGCCGGACCCGACCGCTATCGGGGTGGGGCTAAGCCATGCGAGTCGTACGCCCGGGGACCGCCGGGCGTGGCGCACGGCTCAGTAACACGTGCCTAACCTACCCTCGGGAGGGAGATAACCCCGGGAAACTGGGGCTAATCCCCCACAGGAGAGGGCGCTGGAAGGCCCCTTCTCCGAAATGGATTACGGCCGATCTGCCGCAATCCGCCCGAGGATGGGGGCACGGCCCATCATGGTAGTTGGCGGGGTAACGGCCCGCCAAGCCGAAGACGGGTGGGGGCCGTGAGAGCGGGAGCCCCGAGATGGGCACTGAGACAAGGGCCCAGGCCCTACGGGGTGCAGCAGGCGCGAAAACTCCGCAATGCGGGAAACCGTGACGGGGCCACCCCGAGTGCCGCCCGAAGAGGGCGGCTTTTGCCCGGTGCAAAAAGCCGGGCGAATAAGCGGGGGGCAAGTCTGGTGTCAGCCGCCGCGGTAATACCAGCCCCGCGAGTGGTCGGGGTGCTTACTGGGCCTAAAGCGCCCGTAGCCGGCCCGGTAAGTCGCCCCTGAAATCCACGGGCTCAACCCGTGGGCTGGGGGCGAAACTGCCGGGCTTGGGGGCGGGAGAGGCCGAGGGTACTCCCGGGGTAGGGGCGAAATCCGATAATCCCGGGAGGACCACCAGTGGCGAAGGCGCTCGGCTGGAACGCGCCCGACGGTGAGGGGCGAAAGCTGGGGGAGCAAAGGGGATTAGATACCCCTGTAGTCCCAGCTGTAAACTATGCGGGCCAGCTGTTGGACGGGCTTAGAGCCCGCCCAGTGGCGGAGGGAAGCCGTTAAGCCCGCCGCCTGGGGAGTACGGCCGCAAGGCTGAAACTTAAAGGAATTGGCGGGGGGGCACCACAAGGGGTGAAGCTTGCGGCTTAATTGGAGTCAACGCCGGAAACCTTACCCGGGGCGACAGCAGGATGATGGCCAGGCTAACGACCTTGCCGGACGAGCTGAGAGGAGGTGCATGGCCGTCGTCAGCTCGTGCCGCGAGGTGTCCGGTTAAGTCCGGCAACGAGCGAGACCCCCACCCCTAGTTGCTACCCGGTCCTTCGGGACCGGGGGCACACTAGGGGGACTGCCGGCGTAAGCCGGAGGAAGGAGGGGGCCACGGCAGGTCAGTATGCCCCGAAACCCCGGGGCTGCACGCGAGCTGCAATGGCGGGGACAGCGGGATCCGACCCCGAAAGGGGAAGGCAATCCCGTAAACCCCGCCCCAGTAGGGATCGAGGGCTGCAACTCGCCCTCGTGAACGTGGAATCCCTAGTAACCGCGTGTCACCAACGCGCGGTGAATACGTCCCTGCCCCTTGCACACACCGCCCGTCGCGCCACCCGAGGGAGCCCCCAACGAGGCCTCTTCTTTCCAGGGTAACCCCCTGGGGAGGGGAGGACGAGTTGGGGGCTCCCGAGGGGGGCGAAGTCGTAACAAGGTGGCCGTAGGGGAACCTGCGGCCGGATCACCTCCT"
         else 
             S=""
-            listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
+            listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","TRECS_bact_DNADirectedRNAPolymeraseSubunit_β.fst","TRECS_bact_ChaperoninGroeL.fst"]
         end
     end
     @onchange requestedseq begin
@@ -172,7 +172,7 @@ using DataFrames
         identitypc=[]
         lataxinomie=[]
         limitedsearch = 50
-        listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst"]
+        listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","TRECS_bact_DNADirectedRNAPolymeraseSubunit_β.fst","TRECS_bact_ChaperoninGroeL.fst"]
         listkopf::Vector{String}=[]
         m = "non actif "
         matricetranchetransposee =[] #la matrice transposée en cas de selection d'une tranche dans le MSA
@@ -276,12 +276,13 @@ using DataFrames
             longueurdefasta=length(replace(split(S,"\n",limit=2)[2],"\n" => "","-" => ""))
             decisonlongueur_l= longueurdefasta < borne_longueur_inf ? false : true 
             decisonlongueur_L= longueurdefasta > borne_longueur_sup ? false : true 
+            
             if ! decisonlongueur_L
                 termine = "A CANDIDATE SEQUENCE FOR A BLAST SEARCH AGAINST THE DB MUST BE SHORTER (max bp $borne_longueur_sup)"
                 S = "help: enter  ?length in the fasta form"
             else
                 fairearbre= true
-                if decisonlongueur_l == false
+                if decisonlongueur_l == false || longueurdefasta > 800 #même pour le 5S
                     termine = "TREE WILL NOT BE BUILT: BLAST ONLY  (min bp $borne_longueur_inf)"
                     #S = " THE LENGTH OF THE QUERY IS INADEQUATE FOR PHYLOGENY BLAST ONLY"
                     #temporisation ici 
@@ -402,7 +403,7 @@ using DataFrames
         selectionmsasup::Int64 = selectionintervalle.range.stop
         drapeau_tranche = true
         #println("cool de ",selectionmsainf," a ",selectionmsasup,"  ",typeof(selectionmsainf))
-        trim_fait = false
+        trim_fait = false #balises pour la reactivité
         trim_fait_persistant = true
         
         matricetrimtransposée = copy(transposée_msa) #important pour éviter les modifications NB matrice après trimming seulement (on détruit la matrice initiale)
@@ -419,7 +420,7 @@ using DataFrames
             # trim_fait = true
             selectionfaite =true
             #println("--- FIN ---")
-            seaview_sel = panoramatographe_nuc(replace(fintrim,".sth" =>".fasta"),replace(fintrim,".sth" =>""),1)
+            seaview_sel = panoramatographe_nuc(replace(fintrim,".sth" =>".fasta"),replace(fintrim,".sth" =>""),20)
             seaview_sel = split(seaview_sel,"public/")[2]
             #chappe2,listkopf2,matricetransposée2 = tranchedemsa(a_trimer, 800, 1600, matricetransposée, listkopf)
             #chappe, message, posttrimmage = retourafasta(2,"/Users/jean-pierreflandrois/Documents/PkPhyExplo/public/utilisateurs/task_20241019_124721_rM2TmZbG/atelier_20241019_124721_rM2TmZbG/alignement_finale.fasta",listkopf2,matricetransposée2)
