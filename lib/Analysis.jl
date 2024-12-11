@@ -181,7 +181,7 @@ function faitblast(db_blast::String, S::String, dirutilisateur::String, nbsearch
     ############
     collection_avec_query::String = ""
     #seqfile::String=joinpath(dirutilisateur,"blastfasta.fasta")
-    listedesaextraire::Vector{String15}=[]#Vector{String15} String15["GCF_900106905.1", "GCF_001889405.1", "GCF_003722055.1", "GCF_002761295.1", "GCF_003722115.1"]
+    listedesaextraire::Vector{String}=[]#Vector{String15} String15["GCF_900106905.1", "GCF_001889405.1", "GCF_003722055.1", "GCF_002761295.1", "GCF_003722115.1"]
     listedesaextraire=blastread[!,1]
     vecteurtetescoupees::Vector{SubString{String}}=[]#Vector{SubString{String}} SubString{String}["Methanohalophilus_halophilus~TEU~GCF_900106905.1", "Methanohalophilus_halophilus~RTEC~GCF_001889405.1",...
     vecteurtetescoupees=map((s) ->split(s,'=')[1],blastread[!,2])

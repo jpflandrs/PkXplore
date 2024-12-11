@@ -24,7 +24,7 @@ using DataFrames
     @in termine = "Blast running"
     @in banqueselectionnée = "TRECS_16SrRNA.fst"
     # @out listofbanques = ""
-    @in listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","TRECS_bact_DNADirectedRNAPolymeraseSubunit_β.fst","TRECS_bact_ChaperoninGroeL.fst"]
+    @in listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","Ba_TRECS_DNADirectedRNAPolymeraseSubunitBeta.fst","Ba_TRECS_TranslationElongationFactorTu.fst","Ba_TRECS_ChaperoninGroeL.fst","cTRECS_16SrRNA.fst","cTRECS_23SrRNA.fst","cTRECS_5SrRNA.fst"]
     @in borne_longueur_inf=800
     @in borne_longueur_sup=2000
     @in requestedseq = 50
@@ -103,6 +103,8 @@ using DataFrames
     @onchange banqueselectionnée begin
         banqueblast = banqueselectionnée
         # testing = false
+            #rna normal
+            
         if banqueblast == "TRECS_16SrRNA.fst"
             borne_longueur_inf=800
             borne_longueur_sup=2200
@@ -112,9 +114,27 @@ using DataFrames
         elseif banqueblast == "TRECS_5SrRNA.fst"
             borne_longueur_inf=75
             borne_longueur_sup=200
+            ###rna + candidatus
+        elseif banqueblast == "cTRECS_16SrRNA.fst"
+            borne_longueur_inf=800
+            borne_longueur_sup=2200
+        elseif banqueblast == "cTRECS_23SrRNA.fst"
+            borne_longueur_inf=1400
+            borne_longueur_sup=4500
+        elseif banqueblast == "cTRECS_5SrRNA.fst"
+            borne_longueur_inf=75
+            borne_longueur_sup=200
+            ###proteines
+        elseif banqueblast == "Ba_TRECS_ChaperoninGroeL.fst"
+            borne_longueur_inf=1400
+            borne_longueur_sup=4500
+        elseif banqueblast == "Ba_TRECS_DNADirectedRNAPolymeraseSubunitBeta.fst"
+            borne_longueur_inf=1400
+            borne_longueur_sup=4500
+        elseif banqueblast == "Ba_TRECS_TranslationElongationFactorTu.fst"
+            borne_longueur_inf=1400
+            borne_longueur_sup=4500
         end
-        
-        #println("selection :",borne_longueur_inf," ",borne_longueur_sup)
     end
     
     @onchange testing begin
@@ -127,7 +147,7 @@ using DataFrames
             S=">test16S\nAAACCGGTTGATCCTGCCGGACCCGACCGCTATCGGGGTGGGGCTAAGCCATGCGAGTCGTACGCCCGGGGACCGCCGGGCGTGGCGCACGGCTCAGTAACACGTGCCTAACCTACCCTCGGGAGGGAGATAACCCCGGGAAACTGGGGCTAATCCCCCACAGGAGAGGGCGCTGGAAGGCCCCTTCTCCGAAATGGATTACGGCCGATCTGCCGCAATCCGCCCGAGGATGGGGGCACGGCCCATCATGGTAGTTGGCGGGGTAACGGCCCGCCAAGCCGAAGACGGGTGGGGGCCGTGAGAGCGGGAGCCCCGAGATGGGCACTGAGACAAGGGCCCAGGCCCTACGGGGTGCAGCAGGCGCGAAAACTCCGCAATGCGGGAAACCGTGACGGGGCCACCCCGAGTGCCGCCCGAAGAGGGCGGCTTTTGCCCGGTGCAAAAAGCCGGGCGAATAAGCGGGGGGCAAGTCTGGTGTCAGCCGCCGCGGTAATACCAGCCCCGCGAGTGGTCGGGGTGCTTACTGGGCCTAAAGCGCCCGTAGCCGGCCCGGTAAGTCGCCCCTGAAATCCACGGGCTCAACCCGTGGGCTGGGGGCGAAACTGCCGGGCTTGGGGGCGGGAGAGGCCGAGGGTACTCCCGGGGTAGGGGCGAAATCCGATAATCCCGGGAGGACCACCAGTGGCGAAGGCGCTCGGCTGGAACGCGCCCGACGGTGAGGGGCGAAAGCTGGGGGAGCAAAGGGGATTAGATACCCCTGTAGTCCCAGCTGTAAACTATGCGGGCCAGCTGTTGGACGGGCTTAGAGCCCGCCCAGTGGCGGAGGGAAGCCGTTAAGCCCGCCGCCTGGGGAGTACGGCCGCAAGGCTGAAACTTAAAGGAATTGGCGGGGGGGCACCACAAGGGGTGAAGCTTGCGGCTTAATTGGAGTCAACGCCGGAAACCTTACCCGGGGCGACAGCAGGATGATGGCCAGGCTAACGACCTTGCCGGACGAGCTGAGAGGAGGTGCATGGCCGTCGTCAGCTCGTGCCGCGAGGTGTCCGGTTAAGTCCGGCAACGAGCGAGACCCCCACCCCTAGTTGCTACCCGGTCCTTCGGGACCGGGGGCACACTAGGGGGACTGCCGGCGTAAGCCGGAGGAAGGAGGGGGCCACGGCAGGTCAGTATGCCCCGAAACCCCGGGGCTGCACGCGAGCTGCAATGGCGGGGACAGCGGGATCCGACCCCGAAAGGGGAAGGCAATCCCGTAAACCCCGCCCCAGTAGGGATCGAGGGCTGCAACTCGCCCTCGTGAACGTGGAATCCCTAGTAACCGCGTGTCACCAACGCGCGGTGAATACGTCCCTGCCCCTTGCACACACCGCCCGTCGCGCCACCCGAGGGAGCCCCCAACGAGGCCTCTTCTTTCCAGGGTAACCCCCTGGGGAGGGGAGGACGAGTTGGGGGCTCCCGAGGGGGGCGAAGTCGTAACAAGGTGGCCGTAGGGGAACCTGCGGCCGGATCACCTCCT"
         else 
             S=""
-            listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","TRECS_bact_DNADirectedRNAPolymeraseSubunit_β.fst","TRECS_bact_ChaperoninGroeL.fst"]
+            listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","Ba_TRECS_DNADirectedRNAPolymeraseSubunitBeta.fst","Ba_TRECS_TranslationElongationFactorTu.fst","Ba_TRECS_ChaperoninGroeL.fst","cTRECS_16SrRNA.fst","cTRECS_23SrRNA.fst","cTRECS_5SrRNA.fst"]
         end
     end
     @onchange requestedseq begin
@@ -172,7 +192,7 @@ using DataFrames
         identitypc=[]
         lataxinomie=[]
         limitedsearch = 50
-        listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","TRECS_bact_DNADirectedRNAPolymeraseSubunit_β.fst","TRECS_bact_ChaperoninGroeL.fst"]
+        listebanques = ["TRECS_16SrRNA.fst","TRECS_23SrRNA.fst","TRECS_5SrRNA.fst","Ba_TRECS_DNADirectedRNAPolymeraseSubunitBeta.fst","Ba_TRECS_TranslationElongationFactorTu.fst","Ba_TRECS_ChaperoninGroeL.fst","cTRECS_16SrRNA.fst","cTRECS_23SrRNA.fst","cTRECS_5SrRNA.fst"]
         listkopf::Vector{String}=[]
         m = "non actif "
         matricetranchetransposee =[] #la matrice transposée en cas de selection d'une tranche dans le MSA
@@ -282,7 +302,7 @@ using DataFrames
                 S = "help: enter  ?length in the fasta form"
             else
                 fairearbre= true
-                if decisonlongueur_l == false || longueurdefasta > 800 #même pour le 5S
+                if decisonlongueur_l == false #|| longueurdefasta > 800 #même pour le 5S
                     termine = "TREE WILL NOT BE BUILT: BLAST ONLY  (min bp $borne_longueur_inf)"
                     #S = " THE LENGTH OF THE QUERY IS INADEQUATE FOR PHYLOGENY BLAST ONLY"
                     #temporisation ici 
