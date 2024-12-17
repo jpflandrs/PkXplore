@@ -126,14 +126,14 @@ using DataFrames
             borne_longueur_sup=200
             ###proteines
         elseif banqueblast == "Ba_TRECS_ChaperoninGroeL.fst"
-            borne_longueur_inf=1400
-            borne_longueur_sup=4500
+            borne_longueur_inf=600
+            borne_longueur_sup=2000
         elseif banqueblast == "Ba_TRECS_DNADirectedRNAPolymeraseSubunitBeta.fst"
-            borne_longueur_inf=1400
-            borne_longueur_sup=4500
+            borne_longueur_inf=800
+            borne_longueur_sup=5500
         elseif banqueblast == "Ba_TRECS_TranslationElongationFactorTu.fst"
-            borne_longueur_inf=1400
-            borne_longueur_sup=4500
+            borne_longueur_inf=500
+            borne_longueur_sup=1500
         end
     end
     

@@ -250,7 +250,6 @@ end
 
 
 
-
 function alignement(fastafile::String)
     return alignefasta(fastafile,"mafft",replace(fastafile,"collection" => "alignement"))
 end
