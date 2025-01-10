@@ -79,6 +79,28 @@ _Note that all the directories are within the container_, this is not very usefu
 ``--mount type=bind,source=/pathto/log,target=/home/genie/app/log \``
 ``pkxplore``
 
+### Behind NGNIX
+
+Here is the in-use configuration:
+
+    server {
+    listen 80;
+    listen [::]:80;
+
+    server_name   134.214.35.110;
+    root          /;
+    index         welcome.html;
+
+    location / {
+        proxy_http_version 1.1;
+        proxy_pass http://localhost:8000;
+        #websocket specific settings
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+    }
+    }
+
 ## Testing
 
 **Here some sequences to test the website 
