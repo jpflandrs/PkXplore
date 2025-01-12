@@ -81,7 +81,7 @@ _Note that all the directories are within the container_, this is not very usefu
 
 ### Behind NGNIX
 
-Here is the in-use configuration:
+Here is the in-use configuration (supposed to be in a "genieapp" file for exemple):
 
     server {
     listen 80;
@@ -100,6 +100,10 @@ Here is the in-use configuration:
         proxy_set_header Host $host;
     }
     }
+
+This file is in the "sites-available" directory and a symbolic link make it available in "sites-enabled"
+``sudo ln -s /etc/nginx/sites-available/genieapp /etc/nginx/sites-enabled/genieapp``
+No other symbolic link in "sites-enabled" otherwise it may not work: verify that the "default" file is not in "sites-enabled". Note that the "default" link may reappear, for instance after an upgrade.
 
 ## Testing
 
